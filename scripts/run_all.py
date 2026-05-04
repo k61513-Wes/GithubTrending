@@ -9,6 +9,7 @@ load_dotenv(override=True)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+TEAMS_WEBHOOK_URL = os.getenv("TEAMS_WEBHOOK_URL")
 
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY 未設定，請檢查 .env 或 GitHub Secrets")
@@ -22,6 +23,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 DATA_DIR = os.path.join(ROOT_DIR, "data")
 ARCHIVE_DIR = os.path.join(DATA_DIR, "archive")
+CONFIG_PATH = os.path.join(ROOT_DIR, "config.json")
 
 os.makedirs(ARCHIVE_DIR, exist_ok=True)
 
@@ -29,6 +31,13 @@ from crawler import fetch_trending
 from filter import filter_ai
 from summarize import summarize_projects
 from notify import notify
+from notify_teams import notify_teams
+
+
+def load_notification_config() -> dict:
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    return config.get("notifications", {"telegram": True, "teams": True})
 
 
 def get_taiwan_now() -> datetime:
@@ -36,7 +45,7 @@ def get_taiwan_now() -> datetime:
     return datetime.now(tz_taipei)
 
 
-def write_news_json(projects: list[dict], now: datetime) -> None:
+def write_news_json(projects: list[dict], now: datetime):
     date_str = now.strftime("%Y-%m-%d")
     generated_at = now.isoformat()
 
@@ -80,6 +89,8 @@ def update_index(date_str: str) -> None:
 
 def main():
     now = get_taiwan_now()
+    notif_config = load_notification_config()
+
     print(f"=== GitHub Trending AI 日報 ({now.strftime('%Y-%m-%d %H:%M')}) ===")
 
     print("\n[1/5] 抓取 GitHub Trending...")
@@ -102,8 +113,19 @@ def main():
     write_archive(news_path, date_str)
     update_index(date_str)
 
-    print("\n[5/5] Telegram 推播...")
-    notify(date_str, enriched)
+    print("\n[5/5] 推播通知...")
+
+    if notif_config.get("telegram", True):
+        print("  → Telegram")
+        notify(date_str, enriched)
+    else:
+        print("  → Telegram [已停用]")
+
+    if notif_config.get("teams", True):
+        print("  → Teams")
+        notify_teams(date_str, enriched)
+    else:
+        print("  → Teams [已停用]")
 
     print("\n=== 完成 ===")
 
