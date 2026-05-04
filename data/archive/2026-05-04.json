@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T16:29:16.748588+08:00",
+  "generated_at": "2026-05-04T17:05:59.885022+08:00",
   "date": "2026-05-04",
   "total_count": 6,
   "projects": [
@@ -9,8 +9,8 @@
       "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
       "language": "TypeScript",
       "stars_today": 1840,
-      "total_stars": 39714,
-      "summary_zh": "Tech Blog Editor.\nTraditional Chinese.\nIntroduce the GitHub project `ruvnet/ruflo`.\n`ruvnet/ruflo`, Agent orchestration platform for Claude, multi-agent swarms, autonomous workflows, conversational AI, enterprise architecture, self-learning, RAG, Claude Code/Codex integration. TypeScript.\n\n        *   ONLY final Traditional Chinese output.\n        *   NO analysis, English, drafts, bullet points, or thinking steps.\n        *   EXACTLY three sentences:\n            1.  What it is.\n            2.  What problem it solves/key features.\n            3.  Who it's for.\n        *   TOTAL word count: 80–120 characters/words (Traditional Chinese characters usually).\n        *   Tone: Natural.\n\n    *   *Sentence 1 (What is it):* Ruflo 是一個專為 Claude 設計的頂尖智能體編排平台。 (Ruflo is a leading agent orchestration platform designed for Claude.)\n    *   *Sentence 2 (Features/Problem):* 它能部署多智能體集群並協調自動化工作流，並整合了企業級架構、自我學習能力與 RAG 技術，讓開發者輕鬆建構複雜的對話式 AI 系統。 (It can deploy multi-agent swarms and coordinate automated workflows, integrating enterprise-grade architecture, self-learning capabilities, and RAG technology, allowing developers to easily build complex conversational AI systems.)\n    *   *Sentence 3 (Who it's for):* 這款工具非常適合需要建構高效能 AI 代理工作流或追求企業級 AI 解決方案的開發者與工程團隊。 (This tool is very suitable for developers and engineering teams who need to build high-performance AI agent workflows or pursue enterprise-level AI solutions.)\n\n    *   *Combined:* Ruflo 是一個專為 Claude 設計的頂尖智能體編排平台。它能部署多智能體集群並協調自動化工作流，並整合了企業級架構、自我學習能力與 RAG 技術，讓開發者輕鬆建構複雜的對話式 AI 系統。這款工具非常適合需要建構高效能 AI 代理工作流或追求企業級 AI 解決方案的開發者與工程團隊。\n    *   *Length Check:*\n        *   Sentence 1: 23 chars.\n        *   Sentence 2: 57 chars.\n        *   Sentence 3: 42 chars.\n        *   Total: 122 chars. (Slightly over the 120 limit).\n\n    *   *Adjustment:*\n        *   S1: Ruflo 是一個專為 Claude 設計的頂尖智能體編排平台。 (23)\n        *   S2: 它能部署多智能體集群並協調自動化工作流，並整合企業級架構、自我學習與 RAG 技術，簡化複雜對話式 AI 系統的建構。 (52)\n        *   S3: 這款工具非常適合需要建構高效能 AI 代理工作流或追求企業級解決方案的開發者。 (37)\n        *   Total: 23 + 52 + 37 = 112 characters. Perfect.\n\n    *   Traditional Chinese? Yes.\n    *   No analysis/English/bullets? Yes.\n    *   Exactly 3 sentences? Yes.\n    *   Structure (What, Feature, Who)? Yes.\n    *   Length (80-120)? 112 characters. Yes.\n    *   Natural tone? Yes.",
+      "total_stars": 39782,
+      "summary_zh": "Ruflo 是一個專為 Claude 設計的領先代理編排平台，旨在讓開發者快速部署多智能體集群。該平台具備企業級架構與自我學習能力，並整合 RAG 與 Claude Code，能高效協調自主工作流並建構對話式 AI 系統。這非常適合需要構建大規模 AI 自動化流程或高階智能體應用的開發者與企業。",
       "model_used": "gemma-4-31b-it"
     },
     {
@@ -19,8 +19,8 @@
       "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
       "language": "Python",
       "stars_today": 3313,
-      "total_stars": 65929,
-      "summary_zh": "*   Role: Tech blog editor.\n    *   Output Language: Traditional Chinese (繁體中文).\n    *   Input: GitHub project `TauricResearch/TradingAgents`.\n    *   Description: \"Multi-Agents LLM Financial Trading Framework\", Language: Python.\n    *   Strict Constraints:\n        *   Direct output (no analysis, English, drafts, bullets, or thought process).\n        *   Exactly three sentences.\n        *   Structure: 1. What it is; 2. What problem it solves/features; 3. Who is it for.\n        *   Word count: 80–120 words.\n        *   Tone: Natural.\n\n    *   Sentence 1 (What it is): TradingAgents 是一個基於 Python 開發的多智能體大語言模型（LLM）金融交易框架。\n    *   Sentence 2 (Features/Problem): 它透過協作的多智能體系統，將複雜的市場分析與交易策略自動化，大幅提升金融決策的效率與精準度。\n    *   Sentence 3 (Who is it for): 這款工具非常適合想要將 LLM 應用於量化交易、自動化投資或金融科技研究的開發者與分析師。\n\n    *   Sentence 1: TradingAgents 是一個基於 Python 開發的多智能體大語言模型（LLM）金融交易框架。 (28 chars)\n    *   Sentence 2: 它透過協作的多智能體系統，將複雜的市場分析與交易策略自動化，大幅提升金融決策的效率與精準度。 (42 chars)\n    *   Sentence 3: 這款工具非常適合想要將 LLM 應用於量化交易、自動化投資或金融科技研究的開發者與分析師。 (40 chars)\n    *   Total: ~110 characters. Perfect.\n\n    *   繁體中文? Yes.\n    *   No analysis/bullets/English? Yes.\n    *   Exactly three sentences? Yes.\n    *   Structure followed? Yes.\n    *   Word count 80-120? Yes (approx 110).\n    *   Natural tone? Yes.",
+      "total_stars": 65973,
+      "summary_zh": "TradingAgents 是一個基於 Python 開發的多智能體大語言模型（LLM）金融交易框架。該框架利用多個 AI 智能體協作分析市場數據並制定策略，將 LLM 的推理能力轉化為自動化的投資決策。它非常適合量化分析師、AI 交易研究者以及對多智能體系統感興趣的開發者使用。",
       "model_used": "gemma-4-31b-it"
     },
     {
@@ -29,7 +29,7 @@
       "description": "Coding agent for DeepSeek models that runs in your terminal",
       "language": "Rust",
       "stars_today": 343,
-      "total_stars": 2761,
+      "total_stars": 2834,
       "summary_zh": "",
       "model_used": "none"
     },
@@ -39,8 +39,8 @@
       "description": "Claude Agent SDK with a web browsing tool",
       "language": "JavaScript",
       "stars_today": 322,
-      "total_stars": 1927,
-      "summary_zh": "*   Role: Tech Blog Editor.\n    *   Input: GitHub project `browserbase/skills` (Claude Agent SDK with a web browsing tool, JavaScript).\n    *   Output Language: Traditional Chinese.\n    *   Strict constraints:\n        *   No analysis, English, drafts, bullet points, or thought process.\n        *   Exactly three sentences.\n        *   Sentence 1: \"What it is\".\n        *   Sentence 2: \"What problem it solves or key features\".\n        *   Sentence 3: \"Who it's for\".\n        *   Total word count: 80–120 characters (Traditional Chinese characters).\n        *   Tone: Natural.\n\n    *   Project Name: browserbase/skills\n    *   Description: Claude Agent SDK with a web browsing tool.\n    *   Language: JavaScript.\n    *   Core value: Giving Claude (AI agent) the ability to browse the web via an SDK.\n\n    *   Sentence 1 (What): 這是由 Browserbase 開發的 skills 專案，是一個專為 Claude AI Agent 設計且基於 JavaScript 的 SDK。\n    *   Sentence 2 (Feature/Problem): 它為 AI 代理整合了強大的網頁瀏覽工具，讓 Claude 能直接地在真實瀏覽器中執行操作並獲取即時資訊。\n    *   Sentence 3 (Who): 這非常適合想要擴展 AI 自動化能力、開發能自主上網執行複雜任務的開發者使用。\n\n    *   S1: 這是由 Browserbase 開發的 skills 專案，是一個專為 Claude AI Agent 設計且基於 JavaScript 的 SDK。(38 chars)\n    *   S2: 它為 AI 代理整合了強大的網頁瀏覽工具，讓 Claude 能直接在真實瀏覽器中執行操作並獲取即時資訊。(39 chars)\n    *   S3: 這非常適合想要擴展 AI 自動化能力、開發能自主上網執行複雜任務的開發者使用。(33 chars)\n    *   Total: 38 + 39 + 33 = 110 characters. (Perfect range: 80-120).\n\n    *   Three sentences? Yes.\n    *   1st: What it is? Yes.\n    *   2nd: Feature? Yes.\n    *   3rd: Who for? Yes.\n    *   Length 80-120? Yes (110).\n    *   No extra output? Yes.\n    *   Traditional Chinese? Yes.",
+      "total_stars": 1935,
+      "summary_zh": "*   Role: Tech Blog Editor.\n    *   Input: GitHub project `browserbase/skills` (Claude Agent SDK with a web browsing tool, JS, link).\n    *   Output requirements:\n        *   Language: Traditional Chinese.\n        *   Format: Only the final text (no analysis, English, drafts, bullets, or thought process).\n        *   Structure: Exactly 3 sentences.\n            1.  What it is.\n            2.  What problem it solves/features.\n            3.  Who is it for.\n        *   Word count: 80–120 characters/words (Traditional Chinese characters usually counted as words in this context).\n        *   Tone: Natural.\n\n    *   Project: `browserbase/skills`\n    *   Description: Claude Agent SDK with a web browsing tool.\n    *   Language: JavaScript.\n    *   Essence: It's an SDK to give Claude (Anthropic's LLM) the ability to browse the web via Browserbase.\n\n    *   *Sentence 1 (What):* 這是一個基於 JavaScript 開發的 Claude Agent SDK，旨在為 Claude AI 提供強大的網頁瀏覽能力。\n    *   *Sentence 2 (Problem/Feature):* 它透過整合 Browserbase 的瀏覽工具，讓 AI 代理能突破知識截斷，直接在現實網路中搜尋資訊並執行複雜的網頁操作。\n    *   *Sentence 3 (Who):* 這非常適合想要開發自動化 Web Agent 或希望提升 LLM 實時資訊獲取能力的軟體工程師。\n\n    *   Sentence 1: 這是一個基於 JavaScript 開發的 Claude Agent SDK，旨在為 Claude AI 提供強大的網頁瀏覽能力。(39 chars)\n    *   Sentence 2: 它透過整合 Browserbase 的瀏覽工具，讓 AI 代理能突破知識截斷，直接在現實網路中搜尋資訊並執行複雜的網頁操作。(51 chars)\n    *   Sentence 3: 這非常適合想要開發自動化 Web Agent 或希望提升 LLM 實時資訊獲取能力的軟體工程師。(40 chars)\n    *   Total: 39 + 51 + 40 = 130 chars. (A bit too long, needs to be 80-120).\n\n    *   S1: 這是一款基於 JavaScript 的 Claude Agent SDK，專為 Claude AI 提供網頁瀏覽能力。 (35 chars)\n    *   S2: 它整合了 Browserbase 工具，讓 AI 代理能突破知識截斷，直接在真實網路中搜尋資訊並執行操作。 (43 chars)\n    *   S3: 本專案非常適合想開發自動化 AI 代理或提升 LLM 實時資訊獲取能力的開發者。 (35 chars)\n    *   Total: 35 + 43 + 35 = 113 characters. Perfect.\n\n    *   Traditional Chinese? Yes.\n    *   Final output only? Yes.\n    *   Three sentences? Yes.\n    *   S1 What? Yes.\n    *   S2 Problem/Feature? Yes.\n    *   S3 Who? Yes.\n    *   Length 80-120? Yes (113).\n    *   Natural tone? Yes.",
       "model_used": "gemma-4-31b-it"
     },
     {
@@ -49,8 +49,8 @@
       "description": "A MCP for Claude Desktop / Claude Code / Windsurf / Cursor to build n8n workflows for you",
       "language": "TypeScript",
       "stars_today": 282,
-      "total_stars": 19670,
-      "summary_zh": "*   Role: Tech Blog Editor.\n    *   Input: GitHub project `czlonkowski/n8n-mcp`.\n    *   Details: MCP for Claude Desktop/Code/Windsurf/Cursor to build n8n workflows. Language: TypeScript.\n    *   Constraint 1: Traditional Chinese output only.\n    *   Constraint 2: No analysis, English, drafts, bullet points, or thought processes.\n    *   Constraint 3: Exactly three sentences.\n        *   Sentence 1: What is it?\n        *   Sentence 2: What problem does it solve or what are its features?\n        *   Sentence 3: Who is it for?\n    *   Constraint 4: Total word count 80–120 characters/words (in Chinese, typically characters).\n    *   Constraint 5: Natural tone.\n\n    *   Sentence 1 (What): `n8n-mcp` 是一個讓 AI 助手（如 Claude Desktop、Cursor 等）能直接操作 n8n 的 MCP 伺服器。\n    *   Sentence 2 (Problem/Feature): 它讓使用者能透過自然語言指令，讓 AI 自動為你構建與設定複雜的 n8n 工作流，大幅降低手動配置的門檻。\n    *   Sentence 3 (Who): 這款工具非常適合希望利用 AI 快速自動化業務流程，且正在使用 Claude 或 Cursor 等 AI 編輯器的開發者與自動化愛好者。\n\n    *   Sentence 1: `n8n-mcp` 是一個讓 Claude Desktop、Cursor 等 AI 助手能直接操作 n8n 的 MCP 伺服器。 (37 chars)\n    *   Sentence 2: 它讓使用者能透過自然語言指令，直接請 AI 自動構建並設定複雜的 n8n 工作流，省去繁瑣的手動配置時間。 (45 chars)\n    *   Sentence 3: 這款工具非常適合想利用 AI 快速實現業務自動化，且習慣使用 AI 輔助開發的工程師或自動化愛好者。 (42 chars)\n    *   Total: 37 + 45 + 42 = 124. A bit too long (limit is 120).\n\n    *   Sentence 1: `n8n-mcp` 是一個讓 Claude Desktop 和 Cursor 等 AI 助手能直接操作 n8n 的 MCP 伺服器。 (38 chars)\n    *   Sentence 2: 它讓使用者能透過自然語言指令，請 AI 自動構建並設定複雜的 n8n 工作流，大幅降低手動配置的門檻。 (43 chars)\n    *   Sentence 3: 這款工具非常適合想利用 AI 快速實現業務自動化，且習慣使用 AI 輔助開發的工程師或愛好者。 (39 chars)\n    *   Total: 38 + 43 + 39 = 120. Exactly on the limit. Let's trim slightly to be safe.\n\n    *   Sentence 1: `n8n-mcp` 是一個讓 Claude Desktop 和 Cursor 等 AI 助手能直接操作 n8n 的 MCP 伺服器。 (38)\n    *   Sentence 2: 它讓使用者能透過自然語言指令，請 AI 自動構建並設定 n8n 工作流，大幅降低手動配置的門檻。 (41)\n    *   Sentence 3: 這款工具非常適合想利用 AI 快速實現業務自動化，且習慣使用 AI 輔助開發的工程師或愛好者。 (39)\n    *   Total: 118 characters.\n\n    *   Traditional Chinese? Yes.\n    *   No analysis/English/bullets? Yes.\n    *   Three sentences? Yes.\n    *   S1 (What), S2 (Feature), S3 (Who)? Yes.\n    *   Word count 80-120? 118 characters. Yes.\n    *   Natural tone? Yes.",
+      "total_stars": 19681,
+      "summary_zh": "這是一個將 n8n 自動化能力整合至 Claude Desktop 與 Cursor 等 AI 工具的 MCP 伺服器。它讓 AI 能直接幫你建構 n8n 工作流，將繁瑣的節點配置簡化為對話指令，大幅提升開發速度。這款工具非常適合想利用 AI 加速流程開發的工程師，以及追求高效能的自動化愛好者。",
       "model_used": "gemma-4-31b-it"
     },
     {
@@ -59,8 +59,8 @@
       "description": "Coding Agent Harness",
       "language": "Rust",
       "stars_today": 591,
-      "total_stars": 3594,
-      "summary_zh": "*   Role: Tech blog editor.\n    *   Language: Traditional Chinese (繁體中文).\n    *   Input: GitHub project `1jehuang/jcode` (Coding Agent Harness, written in Rust).\n    *   Constraints:\n        *   Direct output of the final introduction only.\n        *   No analysis, English, drafts, bullet points, or thinking steps.\n        *   Exactly three sentences:\n            1.  What is it?\n            2.  What problem does it solve or what are its features?\n            3.  Who is it for?\n        *   Word count: 80–120 characters/words (Chinese characters in this context).\n        *   Tone: Natural.\n\n    *   Project: `jcode` by `1jehuang`.\n    *   Description: \"Coding Agent Harness\".\n    *   Language: Rust.\n    *   Meaning: A \"harness\" for coding agents typically means a framework or toolset to test, evaluate, or orchestrate AI coding agents. Being written in Rust suggests high performance and reliability.\n\n    *   Sentence 1 (What): jcode 是一個使用 Rust 語言開發的 Coding Agent Harness 框架。\n    *   Sentence 2 (Features/Problem): 它提供了一套標準化的測試與執行環境，讓開發者能高效地評估並優化 AI 編碼代理的表現。\n    *   Sentence 3 (Who): 這款工具非常適合想要打造高效能 AI 程式碼助手，或需要嚴謹測試自動化編碼流程的開發者。\n\n    *   Count:\n        *   S1: jcode 是一個使用 Rust 語言開發的 Coding Agent Harness 框架。(28 chars)\n        *   S2: 它提供了一套標準化的測試與執行環境，讓開發者能高效地評估並優化 AI 編碼代理的表現。(39 chars)\n        *   S3: 這款工具非常適合想要打造高效能 AI 程式碼助手，或需要嚴謹測試自動化編碼流程的開發者。(39 chars)\n        *   Total: ~106 characters. (Fits 80-120 range).\n\n    *   Check constraints:\n        *   Traditional Chinese? Yes.\n        *   No analysis/English/bullets? Yes.\n        *   Three sentences? Yes.\n        *   Structure: What -> Problem/Feature -> Who? Yes.\n        *   Word count: 106 chars. Yes.\n        *   Natural tone? Yes.",
+      "total_stars": 3606,
+      "summary_zh": "jcode 是一個使用 Rust 語言開發的 Coding Agent 測試與執行框架。它為 AI 程式碼代理提供了一個標準化的環境，能有效管理執行流程並評估代理在實際開發任務中的表現。這款工具非常適合想要開發、測試或優化 AI 程式碼生成代理的開發者與研究人員。",
       "model_used": "gemma-4-31b-it"
     }
   ]
