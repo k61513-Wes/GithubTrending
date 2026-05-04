@@ -1,4 +1,5 @@
-const BASE = '.';
+// 自動取得目前頁面的根路徑，相容本地與 GitHub Pages 子目錄部署
+const BASE = window.location.pathname.replace(/\/[^/]*$/, '') || '.';
 
 const statusEl = document.getElementById('status');
 const metaEl = document.getElementById('meta');
