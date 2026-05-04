@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Trending AI 日報</title>
+  <meta name="description" content="每日自動精選 GitHub Trending 中的 AI / LLM 相關專案，附繁體中文摘要。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>🤖 GitHub Trending AI 日報</h1>
+  <div class="date-selector-wrap">
+    <label for="date-selector">歷史日報：</label>
+    <select id="date-selector"></select>
+  </div>
+</header>
+
+<main>
+  <div id="status">載入中...</div>
+  <div id="meta"></div>
+  <div id="projects-container"></div>
+</main>
+
+<footer>
+  資料每日 09:00（台灣時間）自動更新 &nbsp;·&nbsp;
+  <a href="https://github.com/k61513-Wes/GithubTrending" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
