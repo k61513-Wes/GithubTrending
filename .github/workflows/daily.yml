@@ -1,0 +1,39 @@
+name: Daily AI News
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # UTC 01:00 = 台灣時間 09:00
+  workflow_dispatch:        # 允許手動觸發，方便測試
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run all scripts
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/run_all.py
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/news.json
+          git add data/index.json
+          git add data/archive/
+          git diff --staged --quiet || git commit -m "chore: update daily AI news $(date +'%Y-%m-%d')"
+          git push
