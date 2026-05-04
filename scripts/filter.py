@@ -1,32 +1,32 @@
-AI_KEYWORDS = [
-    # 模型名稱
-    "llm", "gpt", "claude", "gemini", "mistral", "llama", "phi",
-    "qwen", "deepseek", "falcon", "vicuna", "alpaca",
-    # 技術術語
-    "transformer", "diffusion", "embedding", "inference",
-    "fine-tune", "finetune", "rag", "retrieval", "attention",
-    "tokenizer", "quantization", "lora", "qlora",
-    # 應用場景
-    "agent", "chatbot", "copilot", "assistant",
-    "langchain", "llamaindex", "openai", "anthropic",
-    "stable diffusion", "text-to-image", "image generation",
-    # 通用詞
-    "ai", "artificial intelligence", "machine learning",
-    "deep learning", "neural network", "nlp",
-    "multimodal", "vision model",
-]
+import json
+import os
+
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config.json")
 
 
-def is_ai_related(project: dict) -> bool:
+def load_keywords() -> list[str]:
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    keywords = []
+    for category_words in config["ai_keywords"].values():
+        keywords.extend(category_words)
+    return keywords
+
+
+def is_ai_related(project: dict, keywords: list[str]) -> bool:
     text = (project.get("description", "") + " " + project.get("name", "")).lower()
-    return any(kw in text for kw in AI_KEYWORDS)
+    return any(kw in text for kw in keywords)
 
 
 def filter_ai(projects: list[dict]) -> list[dict]:
-    return [p for p in projects if is_ai_related(p)]
+    keywords = load_keywords()
+    return [p for p in projects if is_ai_related(p, keywords)]
 
 
 if __name__ == "__main__":
+    keywords = load_keywords()
+    print(f"載入 {len(keywords)} 個關鍵字")
+
     sample = [
         {"name": "ollama/ollama", "description": "Get up and running with Llama 3"},
         {"name": "torvalds/linux", "description": "Linux kernel source tree"},
