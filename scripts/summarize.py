@@ -11,17 +11,15 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config.json")
 
-PROMPT_TEMPLATE = """你是一位科技部落格編輯，請直接用繁體中文輸出對以下 GitHub 專案的介紹。
+PROMPT_TEMPLATE = """請用繁體中文寫三句話介紹以下 GitHub 專案。只輸出三句話，不要任何其他內容。
 
-嚴格規定：
-- 只輸出最終的繁體中文介紹，不要輸出任何分析過程、英文說明、草稿、bullet points 或思考步驟
-- 共三句話：第一句「這是什麼」、第二句「解決什麼問題或有什麼特色」、第三句「適合誰使用」
-- 總字數 80–120 字，語氣自然
+第一句：這是什麼。
+第二句：它的特色或解決什麼問題。
+第三句：適合誰使用。
 
-專案名稱：{name}
-英文描述：{description}
-程式語言：{language}
-GitHub 連結：{url}"""
+專案：{name}
+描述：{description}
+語言：{language}"""
 
 
 def load_models() -> list[str]:
@@ -37,12 +35,28 @@ def load_models() -> list[str]:
 
 def extract_clean_summary(text: str) -> str:
     """從模型輸出中抽取最後一段純中文介紹，過濾掉推理過程。"""
+    # 策略 1：Gemma 的 "Refining Sentence N:" 格式 — 抓最後精煉的三句
+    refining = re.findall(r'Refining Sentence \d+:\s*([一-鿿][^\n(]+。)', text)
+    if len(refining) >= 3:
+        return ''.join(s.strip() for s in refining[:3])
+
+    # 策略 2：找最後一個高中文比例段落（>60% 中文字、2–4 句、60–300 字）
     paragraphs = [p.strip() for p in re.split(r'\n{2,}', text) if p.strip()]
+    for para in reversed(paragraphs):
+        chinese = len(re.findall(r'[一-鿿]', para))
+        total = len(para.replace(' ', '').replace('\n', ''))
+        if total == 0:
+            continue
+        if chinese / total > 0.6 and 2 <= para.count('。') <= 4 and 60 <= len(para) <= 300:
+            return para
+
+    # 策略 3：原本邏輯（保底）
     for para in reversed(paragraphs):
         has_chinese = bool(re.search(r'[一-鿿]', para))
         is_reasoning = bool(re.search(r'^[\*\-\d]|^\s*[\*\-]', para, re.MULTILINE))
         if has_chinese and not is_reasoning and len(para) >= 30:
             return para
+
     return text
 
 
@@ -58,7 +72,7 @@ def build_prompt(project: dict) -> str:
 def call_gemini(model_name: str, prompt: str) -> str:
     url = f"{GEMINI_BASE}/{model_name}:generateContent?key={GEMINI_API_KEY}"
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
-    resp = requests.post(url, json=payload, timeout=30)
+    resp = requests.post(url, json=payload, timeout=60)
 
     if resp.status_code in (429, 500, 503):
         raise RuntimeError(f"HTTP {resp.status_code}: {resp.text[:200]}")

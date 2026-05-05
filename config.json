@@ -4,9 +4,8 @@
     "teams": true
   },
   "llm_models": [
-    "//gemini-2.5-pro",
-    "gemma-4-31b-it",
-    "gemma-4-26b-a4b-it"
+    "gemma-4-26b-a4b-it",
+    "gemma-4-31b-it"
   ],
   "ai_keywords": {
     "模型名稱": [
