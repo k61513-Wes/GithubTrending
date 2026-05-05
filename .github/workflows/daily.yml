@@ -2,7 +2,7 @@ name: Daily AI News
 
 on:
   schedule:
-    - cron: '0 1 * * *'   # UTC 01:00 = 台灣時間 09:00
+    - cron: '0 3 * * *'   # UTC 03:00 = 台灣時間 11:00
   workflow_dispatch:        # 允許手動觸發，方便測試
 
 permissions:
