@@ -28,7 +28,6 @@ CONFIG_PATH = os.path.join(ROOT_DIR, "config.json")
 os.makedirs(ARCHIVE_DIR, exist_ok=True)
 
 from crawler import fetch_trending
-from filter import filter_ai
 from summarize import summarize_projects
 from notify import notify
 from notify_teams import notify_teams
@@ -91,29 +90,21 @@ def main():
     now = get_taiwan_now()
     notif_config = load_notification_config()
 
-    print(f"=== GitHub Trending AI 日報 ({now.strftime('%Y-%m-%d %H:%M')}) ===")
+    print(f"=== GitHub Trending 日報 ({now.strftime('%Y-%m-%d %H:%M')}) ===")
 
-    print("\n[1/5] 抓取 GitHub Trending...")
+    print("\n[1/4] 抓取 GitHub Trending...")
     all_repos = fetch_trending()
-    print(f"  抓到 {len(all_repos)} 筆")
+    print(f"  共 {len(all_repos)} 筆")
 
-    print("\n[2/5] 過濾 AI 相關專案...")
-    ai_repos = filter_ai(all_repos)
-    print(f"  過濾後剩 {len(ai_repos)} 筆")
+    print("\n[2/4] 生成繁體中文摘要...")
+    enriched = summarize_projects(all_repos)
 
-    if not ai_repos:
-        print("[WARN] 今日無 AI 相關專案，流程結束")
-        return
-
-    print("\n[3/5] 生成繁體中文摘要...")
-    enriched = summarize_projects(ai_repos)
-
-    print("\n[4/5] 輸出 JSON 資料檔...")
+    print("\n[3/4] 輸出 JSON 資料檔...")
     news_path, date_str, news = write_news_json(enriched, now)
     write_archive(news_path, date_str)
     update_index(date_str)
 
-    print("\n[5/5] 推播通知...")
+    print("\n[4/4] 推播通知...")
 
     if notif_config.get("telegram", True):
         print("  → Telegram")
