@@ -34,11 +34,8 @@ def build_header(date: str, total: int) -> str:
 
 def build_project_message(index: int, total: int, project: dict) -> str:
     """每個專案一則訊息"""
-    number_emojis = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟"]
-    num = number_emojis[index] if index < len(number_emojis) else f"{index+1}."
-
     lines = [
-        f"{num} <b>{project['name']}</b>  ⭐ +{project.get('stars_today', 0)}",
+        f"{index+1}. <b>{project['name']}</b>  ⭐ +{project.get('stars_today', 0)}",
     ]
     if project.get("language"):
         lines.append(f"🔧 {project['language']}")

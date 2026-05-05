@@ -8,7 +8,6 @@ load_dotenv(override=True)
 TEAMS_WEBHOOK_URL = os.getenv("TEAMS_WEBHOOK_URL")
 SITE_URL = "https://k61513-wes.github.io/GithubTrending"
 
-NUMBER_EMOJIS = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟"]
 
 
 def send_teams_message(webhook_url: str, card_content: dict) -> bool:
@@ -52,7 +51,6 @@ def build_header_card(date: str, total: int) -> dict:
 
 
 def build_project_card(index: int, project: dict) -> dict:
-    num = NUMBER_EMOJIS[index] if index < len(NUMBER_EMOJIS) else f"{index+1}."
     name = project.get("name", "")
     url = project.get("url", "")
     language = project.get("language", "")
@@ -62,7 +60,7 @@ def build_project_card(index: int, project: dict) -> dict:
     body = [
         {
             "type": "TextBlock",
-            "text": f"{num} **{name}**  ⭐ +{stars_today}",
+            "text": f"{index+1}. **{name}**  ⭐ +{stars_today}",
             "weight": "Bolder",
             "wrap": True
         }
