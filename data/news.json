@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-05T13:34:14.239393+08:00",
+  "generated_at": "2026-05-05T16:40:29.605775+08:00",
   "date": "2026-05-05",
-  "total_count": 9,
+  "total_count": 15,
   "projects": [
     {
       "name": "ruvnet/ruflo",
@@ -9,9 +9,9 @@
       "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
       "language": "TypeScript",
       "stars_today": 2598,
-      "total_stars": 41795,
-      "summary_zh": "ruflo 是一個專為 Claude 設計的領先 AI Agent 編排平台。它能部署智慧型多代理集群並協調自動化工作流，並整合 RAG 與自我學習能力，讓開發者能輕鬆建構企業級的對話式 AI 系統。這款工具非常適合想要深化 Claude 生態應用、建構複雜 AI 工作流的開發者與企業團隊。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 42162,
+      "summary_zh": "1. 這是一個專為 Claude 設計的領先代理編排平台。\n    2. 它提供企業級架構、自我學習集群智能與 RAG 集成，能有效部署多代理集群並協調自主工作流。\n    3. 此專案非常適合想要構建複雜對話式 AI 系統或開發自動化代理流程的開發者使用。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "TauricResearch/TradingAgents",
@@ -19,9 +19,9 @@
       "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
       "language": "Python",
       "stars_today": 2182,
-      "total_stars": 67957,
-      "summary_zh": "TradingAgents 是一個基於 Python 的多代理人 LLM 金融交易框架。它利用多個 AI 代理協作來處理複雜的金融分析與決策，讓投資策略的執行更自動化且智能化。這非常適合想將大型語言模型應用於量化交易，或建構自動化分析系統的開發者與投資者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 68294,
+      "summary_zh": "這是一個基於大型語言模型（LLM）的多智能體金融交易框架。該框架透過多個智能體的協作來處理複雜的交易決策，提升自動化交易的效率與能力。適合金融科技開發者、量化交易員以及對 AI 交易策略感興趣的研究人員使用。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "browserbase/skills",
@@ -29,9 +29,9 @@
       "description": "Claude Agent SDK with a web browsing tool",
       "language": "JavaScript",
       "stars_today": 320,
-      "total_stars": 2181,
-      "summary_zh": "*   Role: Tech Blog Editor.\n    *   Task: Introduce a GitHub project.\n    *   Project Name: `browserbase/skills`.\n    *   Description: Claude Agent SDK with a web browsing tool.\n    *   Language: JavaScript.\n    *   Link: https://github.com/browserbase/skills.\n    *   Constraints:\n        *   Traditional Chinese only.\n        *   No analysis, English explanations, drafts, bullet points, or thinking steps.\n        *   Exactly three sentences:\n            1.  What is it?\n            2.  What problem does it solve/what are its features?\n            3.  Who is it for?\n        *   Word count: 80–120 words.\n        *   Tone: Natural.\n\n    *   *Sentence 1 (What):* This is a JavaScript-based SDK for Claude agents that integrates web browsing capabilities.\n    *   *Sentence 2 (Why/Features):* It allows Claude agents to interact with the live web, enabling them to retrieve real-time information and perform actions across websites to overcome the limitations of static training data.\n    *   *Sentence 3 (Who):* It is ideal for developers looking to build advanced AI agents capable of autonomous web navigation and real-time data processing.\n\n    *   *Draft 1:*\n        這是一個基於 JavaScript 開發的 Claude Agent SDK，旨在為 AI 代理提供強大的網頁瀏覽工具。它解決了大型語言模型無法獲取即時資訊的痛點，讓 Claude 能直接操作瀏覽器以抓取最新數據或執行複雜的網頁任務。這款工具非常適合想要打造具備自動化上網能力且能處理即時資訊之 AI 應用程式的開發者使用。\n\n    *   *Sentence 1:* 這是一個基於 JavaScript 開發的 Claude Agent SDK，旨在為 AI 代理提供強大的網頁瀏覽工具。 (37 characters)\n    *   *Sentence 2:* 它解決了大型語言模型無法獲取即時資訊的痛點，讓 Claude 能直接操作瀏覽器以抓取最新數據或執行複雜的網頁任務。 (52 characters)\n    *   *Sentence 3:* 這款工具非常適合想要打造具備自動化上網能力且能處理即時資訊之 AI 應用程式的開發者使用。 (43 characters)\n    *   *Total:* 37 + 52 + 43 = 132 characters. (Too long, need 80-120).\n\n    *   *Refining Sentence 1:* 這是一個基於 JavaScript 的 Claude Agent SDK，專為 AI 代理提供網頁瀏覽功能。 (32 chars)\n    *   *Refining Sentence 2:* 它讓 Claude 能直接操作瀏覽器以獲取即時資訊，有效突破模型訓練數據的時效限制並執行複雜的網頁任務。 (46 chars)\n    *   *Refining Sentence 3:* 這非常適合想開發具備自動化上網能力與即時數據處理功能的 AI 應用開發者。 (35 chars)\n    *   *Total:* 32 + 46 + 35 = 113 characters. (Perfect, fits 80-120 range).\n\n    *   Three sentences? Yes.\n    *   Sentence 1 (What)? Yes.\n    *   Sentence 2 (Problem/Feature)? Yes.\n    *   Sentence 3 (Who)? Yes.\n    *   Traditional Chinese? Yes.\n    *   No other output? Yes.\n    *   Word count 80-120? Yes (113 chars).\n    *   Natural tone? Yes.",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 2228,
+      "summary_zh": "這是一個整合了網頁瀏覽功能的 Claude Agent SDK。它讓 AI 代理能夠直接與網頁進行互動，進而完成需要瀏覽網路的複雜任務。這款工具非常適合想要開發具備網路操作能力的 AI 代理之 JavaScript 開發者。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "Hmbown/DeepSeek-TUI",
@@ -39,9 +39,29 @@
       "description": "Coding agent for DeepSeek models that runs in your terminal",
       "language": "Rust",
       "stars_today": 1274,
-      "total_stars": 4498,
-      "summary_zh": "DeepSeek-TUI 是一款使用 Rust 編寫的終端機編碼助手，讓你能直接在命令行與 DeepSeek 模型互動。它將 AI 編碼能力整合進終端環境，避免在瀏覽器與編輯器間頻繁切換，有效優化開發流程。這款工具非常適合偏好極簡操作、習慣使用終端機且追求高效開發的工程師。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 4947,
+      "summary_zh": "Final Choice:\n    這是一個專為 DeepSeek 模型設計、可在終端機中運行的程式碼代理工具（Coding Agent）。\n    它利用 Rust 語言開發，提供了一個高效且輕量化的指令列介面，讓使用者能直接在終端機環境中進行程式碼開發輔助。\n    這款工具非常適合習慣在終端機下工作，並希望利用 DeepSeek 模型提升開發效率的程式設計師。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "soxoj/maigret",
+      "url": "https://github.com/soxoj/maigret",
+      "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+      "language": "Python",
+      "stars_today": 1119,
+      "total_stars": 25199,
+      "summary_zh": "Maigret 是一個基於 Python 開發的開源偵查工具。它能透過單一的使用者名稱，在超過 3000 個網站中自動搜尋並彙整出完整的個人資料。這款工具非常適合網路安全研究人員、數位調查員以及對開放來源情報（OSINT）感興趣的使用者。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "qbittorrent/qBittorrent",
+      "url": "https://github.com/qbittorrent/qBittorrent",
+      "description": "qBittorrent BitTorrent client",
+      "language": "C++",
+      "stars_today": 82,
+      "total_stars": 37127,
+      "summary_zh": "1. 這是一個開源的 BitTorrent 下載客戶端。\n    2. 它提供輕量、高效且無廣告的使用體驗，並具備強大的檔案管理功能。\n    3. 適合追求穩定、純淨且高效檔案下載體驗的使用者。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "czlonkowski/n8n-mcp",
@@ -49,9 +69,9 @@
       "description": "A MCP for Claude Desktop / Claude Code / Windsurf / Cursor to build n8n workflows for you",
       "language": "TypeScript",
       "stars_today": 496,
-      "total_stars": 19972,
-      "summary_zh": "這是一個將 n8n 整合至 Claude Desktop、Cursor 及 Windsurf 的 MCP 伺服器。它讓 AI 助手能直接為你構建並管理 n8n 工作流，大幅減少手動設定的繁瑣流程。如果你是希望利用 AI 快速實現自動化流程的開發者或效率達人，這個工具絕對不能錯過。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 20028,
+      "summary_zh": "這是一個專為 n8n 設計的 MCP（Model Context Protocol）伺服器。\n    它能讓 Claude Desktop、Claude Code、Windsurf 或 Cursor 等 AI 工具直接協助你建立 n8n 工作流。\n    適合想要透過 AI 自動化建構工作流的開發者與自動化工程師使用。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "1jehuang/jcode",
@@ -59,9 +79,9 @@
       "description": "Coding Agent Harness",
       "language": "Rust",
       "stars_today": 548,
-      "total_stars": 3982,
-      "summary_zh": "jcode 是一個使用 Rust 語言開發的編碼代理人測試框架。它為 AI 編碼助手提供標準化的執行與評估環境，能有效驗證代理人在實際開發任務中的表現與正確性。這款工具非常適合致力於開發高效能 AI 程式碼生成工具，或需要嚴謹測試 AI 編碼能力的研究員與工程師使用。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 4037,
+      "summary_zh": "Final Output:\n    這是一個使用 Rust 語言開發的 Coding Agent Harness。\n    它為編碼代理提供了一個標準化的測試與執行環境，用以評估其程式碼生成與處理能力。\n    這項工具非常適合開發 AI 編碼助手或進行程式碼生成研究的開發者使用。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "msitarzewski/agency-agents",
@@ -69,9 +89,9 @@
       "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
       "language": "Shell",
       "stars_today": 1189,
-      "total_stars": 92862,
-      "summary_zh": "",
-      "model_used": "none"
+      "total_stars": 93014,
+      "summary_zh": "這是一個提供完整 AI 代理服務的工具集。\n    它透過具備獨特個性與專業流程的 AI 專家，解決從前端開發到社群經營等多元化的任務需求。\n    適合想要利用自動化 AI 團隊來處理複雜工作流程的使用者。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "virattt/dexter",
@@ -79,9 +99,39 @@
       "description": "An autonomous agent for deep financial research",
       "language": "TypeScript",
       "stars_today": 409,
-      "total_stars": 23301,
-      "summary_zh": "Dexter 是一款以 TypeScript 打造的自主 AI 代理，旨在提供深度的財務研究能力。它能自動執行複雜的金融數據採集與分析任務，將繁瑣的調查過程轉化為高效的深度洞察報告。無論是追求精準分析的金融分析師、專業投資者，還是想開發 AI 財經工具的工程師，都能從中獲益。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 23384,
+      "summary_zh": "這是一個專為深度金融研究設計的自主代理程式。它能透過自動化流程進行深入的財務數據分析，解決人工研究耗時且繁瑣的問題。這款工具非常適合金融分析師、研究人員以及對金融 AI 感興趣的開發者使用。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "Flowseal/zapret-discord-youtube",
+      "url": "https://github.com/Flowseal/zapret-discord-youtube",
+      "description": "",
+      "language": "Batchfile",
+      "stars_today": 67,
+      "total_stars": 27336,
+      "summary_zh": "1. 這是一個利用 Batchfile 腳本執行 zapret 技術的工具。\n    2. 它旨在解決使用者無法正常訪問 Discord 與 YouTube 的網路限制問題。\n    3. 適合需要繞過網路封鎖以順暢使用這些服務的用戶。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "fspecii/ace-step-ui",
+      "url": "https://github.com/fspecii/ace-step-ui",
+      "description": "🎵 The Ultimate Open Source Suno Alternative - Professional UI for ACE-Step 1.5 AI Music Generation. Free, local, unlimited. Stop paying for Suno!",
+      "language": "JavaScript",
+      "stars_today": 237,
+      "total_stars": 3007,
+      "summary_zh": "1. 這是一個專為 ACE-Step 1.5 AI 音樂生成模型設計的專業使用者介面。\n    2. 它提供開源、免費且可在本地端無限次使用的功能，是 Suno 的強大替代方案。\n    3. 這款工具非常適合尋求免費 AI 音樂創作方案的使用者與開發者。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "jellyfin/jellyfin",
+      "url": "https://github.com/jellyfin/jellyfin",
+      "description": "The Free Software Media System - Server Backend & API",
+      "language": "C#",
+      "stars_today": 41,
+      "total_stars": 51238,
+      "summary_zh": "1. Jellyfin 是一個開源且免費的媒體伺服器系統。\n    2. 它能讓使用者自主整理並串流個人影音媒體，解決了專有軟體可能存在的隱私追蹤與限制問題。\n    3. 這款工具非常適合想要打造私人家庭媒體中心，並重視數據隱私的數位媒體愛好者。",
+      "model_used": "gemma-4-26b-a4b-it"
     },
     {
       "name": "cocoindex-io/cocoindex",
@@ -89,9 +139,19 @@
       "description": "Incremental engine for long horizon agents 🌟 Star if you like it!",
       "language": "Python",
       "stars_today": 166,
-      "total_stars": 8089,
-      "summary_zh": "*   Role: Tech Blog Editor.\n    *   Language: Traditional Chinese.\n    *   Input: GitHub project `cocoindex-io/cocoindex` (Incremental engine for long horizon agents).\n    *   Language used in project: Python.\n    *   Strict Constraints:\n        *   No analysis, no English, no drafts, no bullet points, no thinking steps.\n        *   Exactly three sentences:\n            1.  What it is.\n            2.  What problem it solves/features.\n            3.  Who it's for.\n        *   Total length: 80–120 characters.\n        *   Natural tone.\n\n    *   Project: `cocoindex`\n    *   Description: \"Incremental engine for long horizon agents\"\n    *   Key concept: \"Incremental engine\" (meaning it doesn't re-process everything from scratch, handles updates efficiently) and \"Long horizon agents\" (AI agents that operate over long periods or complex tasks).\n\n    *   Sentence 1 (What it is): cocoindex 是一個基於 Python 開發的增量引擎，專為長週期 AI Agent 所設計。\n    *   Sentence 2 (Problem/Feature): 它解決了長任務中資料處理冗餘的問題，透過增量更新機制讓 Agent 能高效處理海量資訊而無需重新掃描。\n    *   Sentence 3 (Who it's for): 這款工具非常適合需要構建複雜、具備長期記憶且追求高效能執行能力的 AI 開發者。\n\n    *   S1: cocoindex 是一個基於 Python 開發的增量引擎，專為長週期 AI Agent 所設計。(35 chars)\n    *   S2: 它解決了長任務中資料處理冗餘的問題，透過增量更新機制讓 Agent 能高效處理海量資訊而無需重新掃描。(46 chars)\n    *   S3: 這款工具非常適合需要構建複雜、具備長期記憶且追求高效能執行能力的 AI 開發者。(38 chars)\n    *   Total: 35 + 46 + 38 = 119 characters. (Slightly tight, let's trim to be safe within 80-120 range).\n\n    *   S1: cocoindex 是一個基於 Python 開發的增量引擎，專為長週期 AI Agent 所設計。(35 chars)\n    *   S2: 它透過增量更新機制解決了長任務中的資料冗餘問題，讓 Agent 能高效處理海量資訊而無需重複掃描。(44 chars)\n    *   S3: 這款工具非常適合需要構建複雜、具備長期記憶且追求高效能 AI 應用程式的開發者。(37 chars)\n    *   Total: 35 + 44 + 37 = 116 characters.\n\n    *   Check constraints:\n        *   Only Traditional Chinese? Yes.\n        *   No analysis/English/drafts? Yes.\n        *   Three sentences? Yes.\n        *   Structure: What -> Problem/Feature -> Who? Yes.\n        *   Word count: 80-120? (116 chars). Yes.\n        *   Natural tone? Yes.",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 8146,
+      "summary_zh": "這是一個專為長時程代理（long-horizon agents）設計的增量引擎。它透過增量處理機制，解決了代理在執行複雜任務時管理長期狀態與數據的挑戰。這項工具非常適合開發自主代理系統或處理長上下文 AI 應用的工程師使用。",
+      "model_used": "gemma-4-26b-a4b-it"
+    },
+    {
+      "name": "docusealco/docuseal",
+      "url": "https://github.com/docusealco/docuseal",
+      "description": "Open source DocuSign alternative. Create, fill, and sign digital documents ✍️",
+      "language": "Ruby",
+      "stars_today": 535,
+      "total_stars": 13512,
+      "summary_zh": "這是一個開源的 DocuSign 替代方案。它提供建立、填寫與數位簽署文件的功能，讓文件處理流程更為數位化。適合尋求電子簽章解決方案的個人或企業使用。",
+      "model_used": "gemma-4-26b-a4b-it"
     }
   ]
 }
