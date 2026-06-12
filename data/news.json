@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T15:11:57.843302+08:00",
+  "generated_at": "2026-06-12T15:29:37.383349+08:00",
   "date": "2026-06-12",
   "total_count": 19,
   "projects": [
@@ -9,9 +9,9 @@
       "description": "A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, and optimized for Apple silicon.",
       "language": "Swift",
       "stars_today": 2430,
-      "total_stars": 33536,
-      "summary_zh": "*   Source Project: `apple/container`\n    *   Description: \"A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, and optimized for Apple silicon.\"\n    *   Language: Swift\n    *   Language requirement: Traditional Chinese (繁體中文).\n    *   Format: Exactly three sentences. No other content.\n    *   Sentence 1: What it is.\n    *   Sentence 2: Features or problem it solves.\n    *   Sentence 3: Who it's for.\n\n    *   S1: This is a tool for creating and running Linux containers on Mac using lightweight VMs. -> 這是一個在 Mac 上透過輕量級虛擬機器來建立與執行 Linux 容器的工具。\n    *   S2: It's written in Swift and optimized for Apple silicon to provide high performance. -> 它使用 Swift 編寫並針對 Apple 晶片進行了優化，以提升運行效率。\n    *   S3: It's for developers who want to run Linux containers on Mac. -> 這適合需要在 Mac 環境下運行 Linux 容器的開發者。\n\n    *   S1: 这是一个在 Mac 上透過輕量級虛擬機器建立與執行 Linux 容器的工具。\n    *   S2: 該專案使用 Swift 編寫，並針對 Apple 晶片進行了效能優化。\n    *   S3: 這適合希望在 Mac 上高效運行 Linux 容器的開發者。\n\n    *   Traditional Chinese? Yes.\n    *   Three sentences? Yes.\n    *   No other content? Yes.\n    *   S1: What it is. (Check)\n    *   S2: Features. (Check)\n    *   S3: Who for. (Check)",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 33581,
+      "summary_zh": "這是一個名為 apple/container 的 GitHub 專案，旨在創建和運行 Linux 容器，利用輕量級虛擬機在 Mac 上實現。它的特色是使用 Swift 編寫，優化了對 Apple 硅片的支持，從而提供了一種高效的容器化解決方案。這個專案適合需要在 Mac 上運行 Linux 容器的開發人員和使用者，尤其是那些使用 Apple 硅片的用戶。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "addyosmani/agent-skills",
@@ -19,9 +19,9 @@
       "description": "Production-grade engineering skills for AI coding agents.",
       "language": "Shell",
       "stars_today": 3278,
-      "total_stars": 55513,
-      "summary_zh": "*   Sentence 1: 這是一個為 AI 編碼代理提供生產級工程技能的專案。\n    *   Sentence 2: 它透過提供專業的工程實踐，解決 AI 在處理複雜生產環境任務時能力不足的問題。\n    *   Sentence 3: 本專案適合開發 AI 助手或致力於提升 AI 自動化編碼能力的開發者使用。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 55563,
+      "summary_zh": "這是一個名為 Agent Skills 的 GitHub 專案，旨在為 AI 編碼代理提供生產級別的工程技能。它的特色是提供一系列的 Shell 腳本和工具，幫助開發人員自動化和優化 AI 編碼代理的工作流程，從而提高開發效率和質量。適合具有 AI 和自動化開發背景的開發人員使用，尤其是那些需要為 AI 編碼代理提供高級工程技能的開發團隊。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "maziyarpanahi/openmed",
@@ -29,9 +29,9 @@
       "description": "open-source healthcare ai",
       "language": "Python",
       "stars_today": 426,
-      "total_stars": 2922,
-      "summary_zh": "*   Sentence 1: 這是一個基於 Python 開發的開源醫療人工智慧專案。\n    *   Sentence 2: 它旨在提供開源的醫療 AI 解決方案，以降低醫療 AI 技術的開發門檻。\n    *   Sentence 3: 此專案適合醫療 AI 研究人員、軟體開發者以及對醫療數位轉型感興趣的專業人士。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 2934,
+      "summary_zh": "Openmed 是一個開源的醫療人工智慧專案，使用 Python 作為開發語言。它的特色是提供了一個開放的平台，讓開發者可以創建和分享醫療相關的 AI 模型和應用，從而解決醫療領域中的一些複雜問題。適合對醫療人工智慧感興趣的開發者、研究人員和醫療專業人員使用。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "phuryn/pm-skills",
@@ -39,9 +39,9 @@
       "description": "PM Skills Marketplace: 100+ agentic skills, commands, and plugins — from discovery to strategy, execution, launch, and growth.",
       "language": "",
       "stars_today": 1978,
-      "total_stars": 16494,
-      "summary_zh": "*Refining to be concise:*\n    1. 這是一個專為產品經理設計的技能市場，提供超過 100 種 AI 代理技能、指令與插件。\n    2. 它涵蓋了從需求探索、策略制定、執行、發佈到成長的完整週期，旨在提升產品管理的效率。\n    3. 本專案適合希望透過 AI 工具優化工作流程的產品經理或產品開發相關人員。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 16507,
+      "summary_zh": "這是一個名為 PM Skills Marketplace 的專案，提供超過 100 個技能、命令和插件的集合。它的特色是涵蓋從發現到策略、執行、發佈和成長等各個階段的技能和工具，幫助用戶提高項目管理能力。這個專案適合項目經理、產品經理和其他相關從業人員使用，以便他們能夠更有效地管理和推動項目的發展。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "NVIDIA/SkillSpector",
@@ -49,9 +49,9 @@
       "description": "Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.",
       "language": "Python",
       "stars_today": 319,
-      "total_stars": 2917,
-      "summary_zh": "*   Project: `NVIDIA/SkillSpector`\n    *   Description: \"Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.\"\n    *   Language: Python\n    *   Requirements: Traditional Chinese, exactly three sentences, no other content.\n    *   Structure:\n        1.  What it is.\n        2.  Features/Problems it solves.\n        3.  Target audience.\n\n    *   *Sentence 1 (What it is):* SkillSpector is a security scanner for AI agent skills developed by NVIDIA.\n        *   Translation: SkillSpector 是由 NVIDIA 開發的 AI 代理技能（AI agent skills）安全掃描工具。\n    *   *Sentence 2 (Features/Problems):* It detects vulnerabilities, malicious patterns, and security risks.\n        *   Translation: 它能偵測 AI 技能中的漏洞、惡意模式以及潛在的安全風險。\n    *   *Sentence 3 (Target audience):* It is suitable for developers or security researchers building AI agents.\n        *   Translation: 這款工具適合開發 AI 代理程式或負責 AI 安全審查的開發人員使用。\n\n    *   S1: SkillSpector 是一款由 NVIDIA 開發的 AI 代理技能（AI agent skills）安全掃描工具。\n    *   S2: 它能有效偵測 AI 技能中的漏洞、惡意模式以及潛在的安全風險。\n    *   S3: 這款工具適合開發 AI 代理程式或負責 AI 安全審查的開發者使用。\n\n    *   Traditional Chinese? Yes.\n    *   Three sentences? Yes.\n    *   No other content? Yes.\n    *   Order correct? Yes.",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 2934,
+      "summary_zh": "NVIDIA/SkillSpector 是一個開源的安全掃描工具，專門用於檢測人工智慧代理程式的技能中潛藏的安全風險。它的特色在於能夠自動化地檢測出漏洞、惡意模式和安全風險，從而幫助開發者提高人工智慧系統的安全性。適合使用這個工具的對象包括人工智慧開發者、安全研究人員和相關領域的從業人員。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "soxoj/maigret",
@@ -59,9 +59,9 @@
       "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
       "language": "Python",
       "stars_today": 661,
-      "total_stars": 32774,
-      "summary_zh": "*   Project: `soxoj/maigret`\n    *   Description: \"Collect a dossier on a person by username from 3000+ sites\"\n    *   Language: Python\n    *   Requirements:\n        *   Traditional Chinese.\n        *   Exactly three sentences.\n        *   Sentence 1: What it is.\n        *   Sentence 2: Features/Problem solved.\n        *   Sentence 3: Target audience.\n        *   Output: Only these three sentences, no other content.\n\n    *   Sentence 1 (What it is): Maigret is an OSINT tool written in Python for finding usernames across the web.\n    *   Sentence 2 (Features): It collects detailed dossiers by searching for a specific username across more than 3,000 websites.\n    *   Sentence 3 (Target audience): It is suitable for security researchers, private investigators, or anyone performing open-source intelligence gathering.\n\n    *   Sentence 1: Maigret 是一個基於 Python 開發的開源情資搜集（OSINT）工具。\n    *   Sentence 2: 它能透過使用者名稱在超過 3,000 個網站中搜尋，快速建立目標人物的詳細資料檔案。\n    *   Sentence 3: 這款工具適合資安研究人員、私家偵探或需要進行公開情報分析的使用者。\n\n    *   Sentence 1: This is what it is. (Check)\n    *   Sentence 2: Features/Problem solved. (Check)\n    *   Sentence 3: Who it's for. (Check)\n    *   Language: Traditional Chinese. (Check)\n    *   Constraint: Only three sentences, no other content. (Check)",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 32783,
+      "summary_zh": "這是一個名為 Maigret 的 GitHub 專案，旨在收集特定用戶在各個網站上的資訊。它的特色是可以從 3000 多個網站中收集用戶的資料，解決了用戶資訊散佈在各個平台的問題。這個專案適合需要收集用戶資訊的開發者、研究人員或數據分析師使用，尤其是那些需要進行用戶行為分析或社交網絡分析的人。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
@@ -69,9 +69,9 @@
       "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
       "language": "",
       "stars_today": 368,
-      "total_stars": 139980,
-      "summary_zh": "*   Target: A GitHub project (`x1xhlol/system-prompts-and-models-of-ai-tools`).\n    *   Project description: A collection of system prompts, internal tools, and AI models for various AI tools like Claude Code, Cursor, Devin AI, v0, etc.\n    *   Format: Exactly three sentences in Traditional Chinese.\n    *   Sentence 1: What it is.\n    *   Sentence 2: Features or problems it solves.\n    *   Sentence 3: Who it is for.\n    *   Constraint: No other content except the three sentences.\n\n    *   *Sentence 1: What it is.*\n        It's a repository that collects system prompts and AI model information from various popular AI coding tools and agents.\n        Draft (ZH): 這是一個收集多款 AI 編碼工具與助手之系統提示詞（System Prompts）及模型資訊的資源庫。\n\n    *   *Sentence 2: Features/Problem solved.*\n        It provides transparency into how top AI tools are configured and helps users understand the inner workings of agents like Cursor, Devin, and v0.\n        Draft (ZH): 它整合了如 Cursor、Devin AI 和 v0 等知名工具的內部提示詞與工具配置，揭示 AI 助手的運作邏輯。\n\n    *   *Sentence 3: Who it is for.*\n        It's suitable for prompt engineers, AI developers, and users who want to optimize their AI interactions.\n        Draft (ZH): 本專案適合提示詞工程師、AI 開發者以及希望優化 AI 互動效果的進階使用者。\n\n    *   Sentence 1: 這是一個收集多款 AI 編碼工具與助手之系統提示詞及模型資訊的資源庫。\n    *   Sentence 2: 它整合了如 Cursor、Devin AI 和 v0 等知名工具的內部提示詞，幫助使用者了解 AI 助手的運作邏輯。\n    *   Sentence 3: 本專案適合提示詞工程師、AI 開發者以及希望優化 AI 互動效果的使用者。\n\n    *   Traditional Chinese? Yes.\n    *   Three sentences? Yes.\n    *   No other content? Yes.\n    *   S1: What? Yes.\n    *   S2: Feature/Problem? Yes.\n    *   S3: Who? Yes.",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 139984,
+      "summary_zh": "這是一個收集和開源各種 AI 工具的系統提示和模型的 GitHub 專案，包括多個知名的 AI 平台和工具。這個專案的特色是提供了一個全面和開源的平台，讓開發者可以使用和研究各種 AI 模型和系統提示，解決開發者在 AI 開發過程中遇到的問題。這個專案適合對 AI 開發感興趣的開發者、研究人員和學生使用，讓他們可以快速地開始使用和研究各種 AI 模型和系統提示。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "refactoringhq/tolaria",
@@ -79,9 +79,9 @@
       "description": "Desktop app to manage markdown knowledge bases",
       "language": "TypeScript",
       "stars_today": 604,
-      "total_stars": 15511,
-      "summary_zh": "S1: Tolaria 是一款專為管理 Markdown 知識庫而設計的桌面應用程式。\n    S2: 它旨在簡化 Markdown 文件的組織與維護過程，讓知識管理更加系統化。\n    S3: 這款工具非常適合需要建立個人知識管理系統或維護技術文檔的使用者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 15516,
+      "summary_zh": "Tolaria 是一個桌面應用程式，旨在幫助用戶管理基於 Markdown 的知識庫。它的特色在於提供了一個簡單且直觀的界面，讓用戶可以輕鬆地組織和查找知識庫中的內容，從而提高生產力和效率。適合需要管理大量 Markdown 文件或知識庫的用戶使用，例如作家、研究人員、學生等。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "obra/superpowers",
@@ -89,9 +89,9 @@
       "description": "An agentic skills framework & software development methodology that works.",
       "language": "Shell",
       "stars_today": 1322,
-      "total_stars": 225254,
-      "summary_zh": "*   Sentence 1: 這是一個代理技能框架與軟體開發方法論。\n    *   Sentence 2: 它提供了一套實用的機制來建構代理能力，解決軟體開發中 AI 代理實作的效率問題。\n    *   Sentence 3: 適合希望將 AI 代理有效整合至開發工作流中的工程師與團隊。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 225282,
+      "summary_zh": "這是一個名為 Superpowers 的專案，提供了一個代理技能框架和軟體開發方法論。它的特色在於提供了一個有效的框架和方法論，幫助開發者提高開發效率和技能，解決軟體開發中的常見問題。適合對軟體開發感興趣的開發者、項目經理和團隊領導者使用，尤其是那些想要提高團隊開發效率和技能的組織。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "restic/restic",
@@ -99,9 +99,9 @@
       "description": "Fast, secure, efficient backup program",
       "language": "Go",
       "stars_today": 61,
-      "total_stars": 34256,
-      "summary_zh": "*   S1: restic 是一個使用 Go 語言開發的快速、安全且高效的備份程式。\n    *   S2: 它提供去重複化與加密功能，並支援多種雲端儲存後端，能有效降低儲存空間並保護資料安全。\n    *   S3: 這款工具適合需要可靠命令列備份方案的開發者與系統管理員。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 34264,
+      "summary_zh": "這是一個名為 restic 的備份程式，使用 Go 語言開發。它的特色是備份速度快、安全性高、效率佳，能夠有效地解決數據備份和恢復的問題。適合對數據安全性有高要求的用戶使用，例如個人用戶、企業或組織，可以用於保護重要數據免受丟失或損壞。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "msitarzewski/agency-agents",
@@ -109,9 +109,9 @@
       "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
       "language": "Shell",
       "stars_today": 1599,
-      "total_stars": 111841,
-      "summary_zh": "*   Sentence 1: 這是一個完整的 AI 代理機構專案，將多種專業的 AI 代理整合在一起。\n    *   Sentence 2: 它提供從前端開發到社群經營等多樣化的專業代理，每位代理都具備獨特的個性、作業流程與交付成果。\n    *   Sentence 3: 這適合想要快速搭建 AI 團隊或需要專業分工來完成複雜任務的使用者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 111856,
+      "summary_zh": "這是一個名為「agency-agents」的GitHub專案，旨在提供一個完整的AI代理機構。 \n它的特色是提供多種專業的AI代理，每個代理都具有獨特的個性、流程和成熟的交付成果，從而解決了尋找多元化AI代理的問題。 \n這個專案適合對AI代理機構感興趣的開發者、研究人員或企業使用，尤其是那些需要多元化AI代理來完成不同任務的人。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "masterking32/MasterDnsVPN",
@@ -119,9 +119,9 @@
       "description": "Advanced DNS tunneling VPN for censorship bypass, optimized beyond DNSTT and SlipStream with low-overhead ARQ, resolver load balancing, high packet-loss stability and speed.",
       "language": "Go",
       "stars_today": 507,
-      "total_stars": 5805,
-      "summary_zh": "MasterDnsVPN 是一個使用 Go 語言開發的高階 DNS 隧道 VPN，旨在繞過網路審查。它優化了 DNSTT 和 SlipStream 的效能，透過低開銷的 ARQ 機制與解析器負載平衡，提升了在高封包遺失環境下的穩定性與速度。這款工具適合需要突破網路封鎖且追求極高穩定性與速度的進階使用者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 5814,
+      "summary_zh": "MasterDnsVPN 是一個高級的 DNS 隧道 VPN 專案，旨在幫助用戶繞過審查和限制。它的特色包括低開銷的自動重傳請求（ARQ）、解析器負載均衡、高速穩定性和高封包丟失容忍度，優於 DNSTT 和 SlipStream 等其他解決方案。這個專案適合需要繞過網路審查和限制的用戶，尤其是那些需要穩定和快速的網路連接的用戶。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "chatwoot/chatwoot",
@@ -129,9 +129,9 @@
       "description": "Open-source live-chat, email support, omni-channel desk. An alternative to Intercom, Zendesk, Salesforce Service Cloud etc. 🔥💬",
       "language": "Ruby",
       "stars_today": 67,
-      "total_stars": 30473,
-      "summary_zh": "Chatwoot 是一個開源的全通路客戶支援平台。它整合了即時聊天與電子郵件支援，提供 Intercom 和 Zendesk 等工具的強大替代方案。這適合需要統一管理多渠道客戶溝通的企業或開發團隊使用。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 30480,
+      "summary_zh": "這是一個開源的即時聊天、電子郵件支持和全渠道客服桌面平台。它的特色是提供了一個強大的客服解決方案，能夠取代Intercom、Zendesk和Salesforce Service Cloud等商業平台，同時支持多渠道的客服管理。適合需要建立強大客服系統的企業、組織或開發者使用，尤其是那些需要自主控制和自訂客服流程的用戶。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "kenn-io/agentsview",
@@ -139,9 +139,9 @@
       "description": "Local-first session intelligence and analytics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. Also: 100x faster replacement for ccusage!",
       "language": "Go",
       "stars_today": 114,
-      "total_stars": 1839,
-      "summary_zh": "S1: AgentsView 是一個專為編碼代理（coding agents）設計的本地優先對話智能與分析工具。\n    S2: 它支援 Claude Code、Codex 等 20 多種代理，並提供比 ccusage 快 100 倍的用量追蹤效能。\n    S3: 這款工具適合想要深入分析並監控 AI 編碼助手使用情況的開發者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 1848,
+      "summary_zh": "這是一個名為 AgentsView 的 GitHub 專案，旨在為編碼代理提供本地優先的會話智慧和分析。它的特色是支持多個編碼代理，包括 Claude Code、Codex 等超過 20 個代理，並且能夠取代 ccusage，速度提升 100 倍。適合使用這個專案的使用者是需要對編碼代理進行會話智慧和分析的開發人員和研究人員。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "alchaincyf/zhangxuefeng-skill",
@@ -149,9 +149,9 @@
       "description": "张雪峰.skill — 张雪峰的认知操作系统。高考志愿/考研/职业规划的实战思维框架。由女娲.skill生成。",
       "language": "",
       "stars_today": 89,
-      "total_stars": 8071,
-      "summary_zh": "*   Sentence 1 (What): 這是一個基於張雪峰認知體系構建的實戰思維框架。\n    *   Sentence 2 (Features): 它提供了關於高考志願填報、考研及職業規劃的邏輯體系，旨在將複雜的選擇轉化為可執行的認知操作系統。\n    *   Sentence 3 (Who): 適合需要進行升學規劃或職涯發展建議的學生及其家長。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 8084,
+      "summary_zh": "這是一個名為「张雪峰.skill」的GitHub專案，旨在提供一個認知操作系統。它的特色是提供高考志願、考研、職業規劃的實戰思維框架，幫助用戶做出明智的決定。適合對於教育和職業規劃感興趣的人使用，尤其是中國大陸的學生和年輕人。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "TapXWorld/ChinaTextbook",
@@ -159,9 +159,9 @@
       "description": "所有小初高、大学PDF教材。",
       "language": "Roff",
       "stars_today": 88,
-      "total_stars": 74020,
-      "summary_zh": "這是一個收集中國從小學到大學所有 PDF 教材的 GitHub 專案。\n    它整合了各個教育階段的教材資源，解決了獲取數位教材不易的問題。\n    適合需要查閱中國教育教材的學生、教師或相關研究人員使用。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 74028,
+      "summary_zh": "這是一個名為ChinaTextbook的GitHub專案，收集了中國的小學、初中、高中和大學的PDF教材。 這個專案的特色是提供了大量的教育資源，解決了學生和教師尋找教材的問題，同時也方便了遠程教育和自學。 這個專案適合中國的小學、初中、高中和大學的學生、教師和教育工作者使用，同時也對於對中國教育感興趣的外國人有一定的參考價值。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "hexo-ai/sia",
@@ -169,9 +169,9 @@
       "description": "SIA is a Self Improving AI framework to autonomously improve the performance of any AI system (Model / Agent) on a benchmark task.",
       "language": "Python",
       "stars_today": 199,
-      "total_stars": 1446,
-      "summary_zh": "*   Project: `hexo-ai/sia`\n    *   Description: \"SIA is a Self Improving AI framework to autonomously improve the performance of any AI system (Model / Agent) on a benchmark task.\"\n    *   Language: Python\n    *   Language of output: Traditional Chinese.\n    *   Constraint 1: Exactly three sentences.\n    *   Constraint 2: No other content.\n    *   Constraint 3: Sentence structure:\n        1. What it is.\n        2. Features/Problem it solves.\n        3. Who it's for.\n\n    *   Sentence 1: SIA 是一個自我提升的 AI 框架。 (SIA is a self-improving AI framework.)\n    *   Sentence 2: 它能自主地提升任何 AI 系統（模型或代理）在基準測試任務中的性能。 (It can autonomously improve the performance of any AI system (model or agent) on benchmark tasks.)\n    *   Sentence 3: 它適合想要優化 AI 效能的開發者或研究人員。 (It's suitable for developers or researchers who want to optimize AI performance.)\n\n    *   S1: SIA 是一個旨在實現自我進化的 AI 框架。 (SIA is an AI framework aimed at achieving self-evolution.)\n    *   S2: 它能讓 AI 模型或代理在基準測試任務中，透過自主學習不斷提升其性能。 (It allows AI models or agents to continuously improve their performance on benchmark tasks through autonomous learning.)\n    *   S3: 這款工具非常適合需要優化 AI 系統效能的開發者與研究人員。 (This tool is very suitable for developers and researchers who need to optimize AI system performance.)\n\n    *   Check against constraints:\n        *   Traditional Chinese? Yes.\n        *   Three sentences? Yes.\n        *   No other content? Yes.\n        *   Structure followed? Yes.",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 1453,
+      "summary_zh": "這是一個名為 SIA 的自我改進人工智慧框架，旨在提升任何人工智慧系統在特定任務上的表現。它的特色是可以自主地改進人工智慧模型或代理的性能，無需人工干預，從而解決人工智慧系統的性能瓶頸問題。適合對人工智慧和機器學習有興趣的開發者和研究人員使用，特別是那些希望提升人工智慧系統表現的開發人員。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "mattermost/mattermost",
@@ -179,9 +179,9 @@
       "description": "Mattermost is an open source platform for secure collaboration across the entire software development lifecycle..",
       "language": "TypeScript",
       "stars_today": 53,
-      "total_stars": 37423,
-      "summary_zh": "*   S1: Mattermost 是一個開源的安全協作平台。\n    *   S2: 它為整個軟體開發生命週期提供安全的溝通工具，以解決團隊協作中的資訊安全問題。\n    *   S3: 此專案適合追求高安全性、需自主部署協作環境的開發團隊與企業。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 37432,
+      "summary_zh": "Mattermost 是一個開源的平台，提供安全的協作工具，適用於整個軟體開發生命週期。它的特色是提供安全、可擴展和可自訂的協作環境，解決了傳統協作工具的安全性和可靠性問題。適合使用 Mattermost 的對象包括軟體開發團隊、企業和組織，需要安全、可靠和高效的協作工具來提升生產力和溝通效率。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     },
     {
       "name": "bannedbook/fanqiang",
@@ -189,9 +189,9 @@
       "description": "翻墙-科学上网",
       "language": "Kotlin",
       "stars_today": 161,
-      "total_stars": 47082,
-      "summary_zh": "*   S1: 這是一個使用 Kotlin 語言開發的科學上網工具。\n    *   S2: 它旨在協助使用者突破網路封鎖，以訪問被限制的全球網站與資訊。\n    *   S3: 此專案適合需要繞過網路審查以獲取自由網路連線的使用者。",
-      "model_used": "gemma-4-31b-it"
+      "total_stars": 47096,
+      "summary_zh": "這是一個名為「fanqiang」的GitHub專案，主要目的是提供翻牆和科學上網的解決方案。這個專案的特色是使用Kotlin語言開發，提供了一種安全和穩定的方式來突破網絡限制，讓用戶可以自由地瀏覽網際網路。適合需要突破網絡限制、追求網絡自由的用戶使用，尤其是那些居住在網絡限制嚴格的地區的人們。",
+      "model_used": "groq/llama-3.3-70b-versatile"
     }
   ]
 }
