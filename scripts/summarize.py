@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config.json")
 
@@ -86,16 +87,54 @@ def call_gemini(model_name: str, prompt: str) -> str:
         raise RuntimeError(f"回應格式異常：{e}  raw={data}")
 
 
+def call_groq(model_name: str, prompt: str) -> str:
+    if not GROQ_API_KEY:
+        raise ValueError("GROQ_API_KEY 未設定")
+    
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": model_name,
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "temperature": 0.2
+    }
+    
+    resp = requests.post(url, json=payload, headers=headers, timeout=60)
+    
+    if resp.status_code in (429, 500, 503):
+        raise RuntimeError(f"Groq API HTTP {resp.status_code}: {resp.text[:200]}")
+    
+    resp.raise_for_status()
+    data = resp.json()
+    
+    try:
+        return data["choices"][0]["message"]["content"].strip()
+    except (KeyError, IndexError) as e:
+        raise RuntimeError(f"Groq 回應格式異常：{e} raw={data}")
+
+
 def generate_summary(project: dict, models: list[str]) -> tuple[str, str]:
     """回傳 (summary_zh, model_used)"""
-    if not GEMINI_API_KEY:
-        raise ValueError("GEMINI_API_KEY 未設定")
-
     prompt = build_prompt(project)
 
     for model_name in models:
         try:
-            raw = call_gemini(model_name, prompt)
+            if model_name.startswith("groq/"):
+                actual_model = model_name[len("groq/"):]
+                raw = call_groq(actual_model, prompt)
+            else:
+                if not GEMINI_API_KEY:
+                    raise ValueError("GEMINI_API_KEY 未設定")
+                raw = call_gemini(model_name, prompt)
+                
             text = extract_clean_summary(raw)
             print(f"  [OK] {model_name}")
             return text, model_name

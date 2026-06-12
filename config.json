@@ -1,9 +1,9 @@
 {
   "notifications": {
-    "telegram": true,
-    "teams": true
+    "telegram": true
   },
   "llm_models": [
+    "groq/llama-3.3-70b-versatile",
     "gemma-4-26b-a4b-it",
     "gemma-4-31b-it"
   ],

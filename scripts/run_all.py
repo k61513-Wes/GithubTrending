@@ -7,16 +7,9 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
-TEAMS_WEBHOOK_URL = os.getenv("TEAMS_WEBHOOK_URL")
-
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY 未設定，請檢查 .env 或 GitHub Secrets")
-if not TELEGRAM_BOT_TOKEN:
-    raise ValueError("TELEGRAM_BOT_TOKEN 未設定，請檢查 .env 或 GitHub Secrets")
-if not TELEGRAM_CHAT_ID:
-    raise ValueError("TELEGRAM_CHAT_ID 未設定，請檢查 .env 或 GitHub Secrets")
 
 # 計算腳本目錄的上層（repo 根目錄）
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -25,18 +18,37 @@ DATA_DIR = os.path.join(ROOT_DIR, "data")
 ARCHIVE_DIR = os.path.join(DATA_DIR, "archive")
 CONFIG_PATH = os.path.join(ROOT_DIR, "config.json")
 
+def check_keys():
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    active_models = [m for m in config.get("llm_models", []) if not m.startswith("//")]
+    
+    has_groq = any(m.startswith("groq/") for m in active_models)
+    has_gemini = any(not m.startswith("groq/") for m in active_models)
+    
+    if has_groq and not GROQ_API_KEY:
+        raise ValueError("已啟用 Groq 模型但 GROQ_API_KEY 未設定，請檢查 .env 或 GitHub Secrets")
+    if has_gemini and not GEMINI_API_KEY:
+        raise ValueError("已啟用 Gemini 模型但 GEMINI_API_KEY 未設定，請檢查 .env 或 GitHub Secrets")
+
+    if not TELEGRAM_BOT_TOKEN:
+        raise ValueError("TELEGRAM_BOT_TOKEN 未設定，請檢查 .env 或 GitHub Secrets")
+    if not TELEGRAM_CHAT_ID:
+        raise ValueError("TELEGRAM_CHAT_ID 未設定，請檢查 .env 或 GitHub Secrets")
+
+check_keys()
+
 os.makedirs(ARCHIVE_DIR, exist_ok=True)
 
 from crawler import fetch_trending
 from summarize import summarize_projects
 from notify import notify
-from notify_teams import notify_teams
 
 
 def load_notification_config() -> dict:
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = json.load(f)
-    return config.get("notifications", {"telegram": True, "teams": True})
+    return config.get("notifications", {"telegram": True})
 
 
 def get_taiwan_now() -> datetime:
@@ -111,12 +123,6 @@ def main():
         notify(date_str, enriched)
     else:
         print("  → Telegram [已停用]")
-
-    if notif_config.get("teams", True):
-        print("  → Teams")
-        notify_teams(date_str, enriched)
-    else:
-        print("  → Teams [已停用]")
 
     print("\n=== 完成 ===")
 
