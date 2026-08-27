@@ -1,234 +1,219 @@
 # GitHub Trending AI 日報系統｜使用手冊
 
-> 最後更新：2026-05-04
-> 網站網址：https://k61513-wes.github.io/GithubTrending
-> Repo 網址：https://github.com/k61513-Wes/GithubTrending
+> 最後更新：2026-08-27  
+> 網站：https://k61513-wes.github.io/GithubTrending  
+> Repo：https://github.com/k61513-Wes/GithubTrending
 
----
-
-## 目錄
-
-1. [系統簡介](#1-系統簡介)
-2. [運作流程](#2-運作流程)
-3. [檔案結構說明](#3-檔案結構說明)
-4. [日常使用：你只需要管這兩個檔案](#4-日常使用你只需要管這兩個檔案)
-5. [手動執行（本地測試）](#5-手動執行本地測試)
-6. [GitHub Actions 自動排程](#6-github-actions-自動排程)
-7. [Telegram 推播格式](#7-telegram-推播格式)
-8. [網站前端說明](#8-網站前端說明)
-9. [金鑰管理](#9-金鑰管理)
-10. [常見問題排查](#10-常見問題排查)
-11. [成本說明](#11-成本說明)
+本手冊以目前 `main` 的 `.github/workflows/daily.yml`、`config.json` 與 `scripts/` 為操作現況。若手冊與 runtime 不一致，先把差異視為 documentation / implementation drift，不要直接用較舊文字覆蓋目前程式。
 
 ---
 
 ## 1. 系統簡介
 
-這是一套**全自動 AI 科技日報系統**，每天早上 09:00（台灣時間）自動執行以下工作：
+GithubTrending 是一套由 GitHub Actions 自動執行的 GitHub Trending 日報系統，目前每天 **11:00（Asia/Taipei）**執行一次：
 
-- 抓取 GitHub Trending 當日熱門專案（約 25 筆）
-- 過濾出 AI / LLM 相關專案（約 5–10 筆）
-- 使用 Gemini / Gemma 模型生成**繁體中文摘要**
-- 透過 **Telegram Bot** 推播每日日報
-- 更新 **GitHub Pages 網站**，保留完整歷史日報
+- 抓取 GitHub Trending 當日熱門專案。
+- 使用 `config.json` 中啟用的 LLM 產生繁體中文摘要。
+- 將結果寫入 `data/news.json`、`data/index.json` 與 `data/archive/`。
+- 依設定透過 Telegram Bot 推播。
+- 由 GitHub Actions 將更新後的 `data/` commit / push 回 repo，供 GitHub Pages 顯示最新與歷史日報。
 
-**運行成本：$0**（全部使用免費方案）
+目前 production workflow 的主要 LLM provider 是 **Groq**，第一順位模型為：
+
+```text
+groq/llama-3.3-70b-versatile
+```
+
+> 注意：repo 仍保留 `scripts/filter.py` 與 `config.json.ai_keywords`，但目前 `scripts/run_all.py` **沒有呼叫 `filter.py`**。因此現行每日主流程是「抓取 Trending → 對抓到的項目產生摘要」，`ai_keywords` 目前不會改變每日輸出內容。若未來要恢復 AI-only 篩選，應以正式程式修改接回主流程，而不是只改手冊。
 
 ---
 
-## 2. 運作流程
+## 2. 現行運作流程
 
+```text
+每天 11:00（Asia/Taipei）
+        |
+        v
+GitHub Actions: .github/workflows/daily.yml
+        |
+        v
+python scripts/run_all.py
+        |
+        +--> [1/4] crawler.py：抓取 GitHub Trending
+        +--> [2/4] summarize.py：依 config.json 呼叫 LLM 產生繁中摘要
+        +--> [3/4] 寫入 news.json / archive / index.json
+        +--> [4/4] notify.py：依設定推送 Telegram
+        |
+        v
+github-actions[bot] commit / push data/
+        |
+        v
+GitHub Pages 顯示最新與歷史日報
 ```
-每天早上 09:00（台灣時間）
-        ↓
-GitHub Actions 觸發排程
-        ↓
-[步驟 1] crawler.py   — 爬取 GitHub Trending（25 筆）
-        ↓
-[步驟 2] filter.py    — 關鍵字過濾，留下 AI 相關（5–10 筆）
-        ↓
-[步驟 3] summarize.py — 呼叫 Gemini API，生成繁體中文摘要
-        ↓
-[步驟 4] run_all.py   — 輸出 news.json、備份至 archive/、更新 index.json
-        ↓
-[步驟 5] notify.py    — Telegram Bot 逐一推播每個專案
-        ↓
-[步驟 6] GitHub Actions git push 回 repo
-        ↓
-GitHub Pages 自動更新，網站顯示今日日報
+
+目前 workflow cron：
+
+```text
+0 3 * * *
 ```
+
+也就是 UTC 03:00 = 台灣時間 11:00。Workflow 同時支援 `workflow_dispatch` 手動觸發。
 
 ---
 
-## 3. 檔案結構說明
+## 3. Repo 結構
 
-```
+```text
 GithubTrending/
-│
-├── config.json                  ← ⭐ 主要設定檔（關鍵字、模型開關）
-│
-├── scripts/
-│   ├── crawler.py               ← 爬蟲：抓取 GitHub Trending
-│   ├── filter.py                ← 過濾：AI 關鍵字比對
-│   ├── summarize.py             ← 摘要：呼叫 Gemini API
-│   ├── notify.py                ← 推播：Telegram Bot
-│   └── run_all.py               ← 主程式：依序串接所有步驟
-│
-├── data/
-│   ├── news.json                ← 當日資料（每天自動覆蓋）
-│   ├── index.json               ← 歷史日期清單（前端切換用）
-│   └── archive/
-│       └── YYYY-MM-DD.json      ← 每日備份（永久保留）
-│
 ├── .github/workflows/
-│   └── daily.yml                ← GitHub Actions 排程設定
-│
-├── index.html                   ← 網站首頁
-├── style.css                    ← 網站樣式
-├── app.js                       ← 網站邏輯
-│
-├── .env                         ← 本地金鑰（不 commit，已加入 .gitignore）
-├── .env.example                 ← 金鑰範本（只有欄位名稱）
-├── requirements.txt             ← Python 套件清單
-└── MANUAL.md                    ← 本手冊
+│   `-- daily.yml              # 排程、Python 版本、Secrets、bot push
+├── scripts/
+│   ├── crawler.py             # 抓 GitHub Trending
+│   ├── summarize.py           # LLM 摘要；Groq / optional Gemini path
+│   ├── notify.py              # Telegram 推播
+│   ├── run_all.py             # 現行每日主流程
+│   `-- filter.py              # AI keyword helper，目前未接入 run_all.py
+├── data/
+│   ├── news.json              # 最新一期
+│   ├── index.json             # 歷史日期索引
+│   `-- archive/               # 每日歷史 JSON
+├── config.json                # LLM、通知、AI keyword 設定
+├── index.html                 # GitHub Pages UI
+├── app.js
+├── style.css
+├── requirements.txt
+├── README.md                  # GitHub 首頁快速入口
+├── MANUAL.md                  # 本手冊
+`-- AGENTS.md                  # 專案規則
 ```
+
+本 repo 目前**沒有提交 `.env.example`**。本機測試需要 `.env` 時請自行建立，不要把實際 API key / Telegram token commit 進 Git。
 
 ---
 
-## 4. 日常使用：你只需要管這兩個檔案
+## 4. 日常設定
 
-### 4-1. `config.json`｜調整過濾規則與模型
+### 4.1 `config.json`：LLM 與通知
 
-這是唯一需要日常維護的設定檔，不需要動任何 Python 程式碼。
-
-#### 模型開關（`llm_models`）
+目前設定：
 
 ```json
-"llm_models": [
-  "//gemini-2.5-pro",     ← 前面加 // 代表停用（目前停用）
-  "gemma-4-31b-it",       ← 啟用，第一優先
-  "gemma-4-26b-a4b-it"    ← 啟用，第二備援
-]
-```
-
-**規則：**
-- 有 `//` 前綴 → 停用，程式會跳過
-- 沒有 `//` → 啟用，依序嘗試
-- 第一個啟用的模型為主力，失敗才自動換下一個
-- 至少要有一個啟用的模型，否則程式會報錯
-
-> ⚠️ 注意：`//` 必須在引號**裡面**，例如 `"//gemini-2.5-pro"`，
-> 不能寫成 `// "gemini-2.5-pro"`（那是無效的 JSON）
-
-**三個可用模型說明：**
-
-| 模型 | 說明 | 特性 |
-|------|------|------|
-| `gemini-2.5-pro` | Google 最強推理模型 | 品質最佳，偶有額度限制 |
-| `gemma-4-31b-it` | 開源 31B Dense 模型 | 品質接近 Pro，較穩定 |
-| `gemma-4-26b-a4b-it` | 開源 26B MoE 模型 | 速度快，輕量備援 |
-
----
-
-#### AI 過濾關鍵字（`ai_keywords`）
-
-關鍵字分四個分類，每個分類可以自由新增或刪除：
-
-```json
-"ai_keywords": {
-  "模型名稱": ["llm", "gpt", "claude", "gemini", ...],
-  "技術術語": ["transformer", "rag", "embedding", ...],
-  "應用場景": ["agent", "chatbot", "copilot", ...],
-  "通用詞":   ["machine learning", "deep learning", ...]
+{
+  "notifications": {
+    "telegram": true
+  },
+  "llm_models": [
+    "groq/llama-3.3-70b-versatile",
+    "//gemma-4-26b-a4b-it",
+    "//gemma-4-31b-it"
+  ]
 }
 ```
 
-**新增關鍵字範例：**
+模型規則：
+
+- `//` 前綴：停用，程式會跳過。
+- 沒有 `//`：啟用，依陣列順序嘗試。
+- `groq/<model>`：由 `scripts/summarize.py` 呼叫 Groq OpenAI-compatible endpoint。
+- 非 `groq/` 的 model name：走程式保留的 Gemini API path，且必須另外提供 `GEMINI_API_KEY`。
+- 至少必須有一個啟用模型。
+
+目前正式 GitHub Actions 只注入 `GROQ_API_KEY`，因此 production 設定應以 Groq active model 為準。
+
+### 4.2 `ai_keywords`：目前不是 production filter
+
+`config.json` 仍保留：
+
 ```json
-"模型名稱": [
-  "llm", "gpt", "claude", "gemini",
-  "o3", "o4", "grok"    ← 直接加在這裡
-]
+"ai_keywords": {
+  "模型名稱": [...],
+  "技術術語": [...],
+  "應用場景": [...],
+  "通用詞": [...]
+}
 ```
 
-**新增分類範例：**
-```json
-"硬體加速": ["cuda", "tpu", "tensorrt", "triton"]
-```
+這些 keyword 會被 `scripts/filter.py` 讀取，但**現行 `run_all.py` 沒有呼叫 `filter_ai()`**。因此：
 
-**過濾邏輯：**
-- 比對欄位：`description`（英文描述）+ `name`（專案名稱）
-- 比對方式：不分大小寫，只要關鍵字出現在文字中任何位置即符合
-- 25 筆 → 通常過濾後剩 5–10 筆
+- 編輯 `ai_keywords` 目前不會改變每日 GitHub Actions 日報內容。
+- 不要把「keyword 已存在」誤認為「production 已啟用篩選」。
+- 若要恢復過濾功能，需要修改主流程並驗證輸出 schema / Pages / Telegram 是否仍一致。
+
+### 4.3 GitHub Secrets
+
+目前 `.github/workflows/daily.yml` 需要：
+
+| Secret | 用途 |
+| --- | --- |
+| `GROQ_API_KEY` | 現行 LLM 摘要 |
+| `TELEGRAM_BOT_TOKEN` | Telegram Bot |
+| `TELEGRAM_CHAT_ID` | Telegram 推播目的地 |
+
+Secret 更換後，下次 workflow 執行即使用新值，不需要修改 repo 內檔案。
 
 ---
 
-### 4-2. GitHub Secrets｜金鑰管理
+## 5. 本機執行
 
-前往：`GitHub Repo → Settings → Secrets and variables → Actions`
-
-| Secret 名稱 | 說明 |
-|------------|------|
-| `GEMINI_API_KEY` | Gemini API 金鑰，用於生成中文摘要 |
-| `TELEGRAM_BOT_TOKEN` | Telegram Bot Token |
-| `TELEGRAM_CHAT_ID` | 推播目標的 Chat ID |
-
-> 金鑰更換後，下次 Actions 執行時自動生效，不需要其他操作。
-
----
-
-## 5. 手動執行（本地測試）
-
-### 環境準備（第一次）
+### 5.1 建立 Python 環境
 
 ```bash
-# 1. 安裝套件
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-
-# 2. 建立 .env 檔（複製範本後填入真實金鑰）
-cp .env.example .env
 ```
 
-`.env` 內容：
+Windows PowerShell 可改用：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
-GEMINI_API_KEY=你的_gemini_api_key
+
+### 5.2 建立 `.env`
+
+目前 production Groq 設定最少需要：
+
+```text
+GROQ_API_KEY=你的_groq_api_key
 TELEGRAM_BOT_TOKEN=你的_bot_token
 TELEGRAM_CHAT_ID=你的_chat_id
 ```
 
-### 執行完整流程
+如果你自行在 `config.json` 啟用了非 `groq/` model，才需要另外加入：
+
+```text
+GEMINI_API_KEY=你的_gemini_api_key
+```
+
+### 5.3 執行完整流程
 
 ```bash
 python scripts/run_all.py
 ```
 
-執行後會看到：
-```
-=== GitHub Trending AI 日報 (2026-05-04 09:15) ===
+目前 console 流程是 4 段：
 
-[1/5] 抓取 GitHub Trending...
-  抓到 25 筆
-
-[2/5] 過濾 AI 相關專案...
-  過濾後剩 8 筆
-
-[3/5] 生成繁體中文摘要...
-  [1/8] 生成摘要：ollama/ollama
-    [OK] gemma-4-31b-it
-  ...
-
-[4/5] 輸出 JSON 資料檔...
-  [OK] 寫入 data/news.json
-  [OK] 備份至 data/archive/2026-05-04.json
-  [OK] 更新 index.json，共 3 筆日期
-
-[5/5] Telegram 推播...
-  [OK] Telegram 推播成功，共 10 則（標題 + 8 專案 + 結尾）
-
-=== 完成 ===
+```text
+[1/4] 抓取 GitHub Trending...
+[2/4] 生成繁體中文摘要...
+[3/4] 輸出 JSON 資料檔...
+[4/4] 推播通知...
 ```
 
-### 只重跑 Telegram 推播（不重新抓資料）
+**這不是唯讀測試。** `run_all.py` 會：
+
+- 對 GitHub Trending 發外部網路請求。
+- 呼叫 Groq / 其他已啟用 LLM provider。
+- 改寫 `data/news.json`、`data/index.json` 與 `data/archive/`。
+- `notifications.telegram=true` 時真的發 Telegram。
+
+只做 code review、文件檢查或 source-level verification 時，不要把 `run_all.py` 當成無副作用 smoke test。
+
+### 5.4 只重跑 Telegram 推播
+
+這個操作也會真的發訊息：
 
 ```bash
 python -c "
@@ -245,166 +230,160 @@ notify(d['date'], d['projects'])
 
 ## 6. GitHub Actions 自動排程
 
-### 排程時間
+### 排程
 
-| 設定 | 說明 |
-|------|------|
-| Cron：`0 1 * * *` | UTC 01:00 = 台灣時間 09:00 |
-| 每天執行一次 | 約消耗 3–4 分鐘（免費額度 2,000 分鐘/月） |
+| 設定 | 現況 |
+| --- | --- |
+| Cron | `0 3 * * *` |
+| UTC | 03:00 |
+| Asia/Taipei | 11:00 |
+| Python | 3.11 |
+| Trigger | schedule + `workflow_dispatch` |
 
 ### 手動觸發
 
-1. 前往：https://github.com/k61513-Wes/GithubTrending/actions
-2. 點選左側 `Daily AI News`
-3. 點選右上角 `Run workflow`
-4. 確認後等待約 3–4 分鐘
+1. 打開 repo 的 **Actions**。
+2. 選擇 `Daily AI News`。
+3. 點 `Run workflow`。
+4. 確認後執行。
 
-### 執行成功的標誌
+手動 dispatch 會真的抓資料、呼叫 LLM、寫入 `data/`、可能發 Telegram，並由 workflow push 更新結果。
 
-- Actions 頁面顯示 ✅ 綠色勾勾
-- Telegram 收到當日推播
-- `data/news.json` 的 `date` 欄位更新為今日日期
-- `data/archive/` 新增今日備份檔案
+### 成功後應看到
 
-### 執行後 git commit 格式
+- GitHub Actions run 成功。
+- `data/news.json` 的 `date` / `generated_at` 更新。
+- `data/archive/YYYY-MM-DD.json` 存在當日資料。
+- `data/index.json` 包含當日日期。
+- Telegram 啟用時收到推播。
+- 若 `data/` 有變更，repo 出現 `github-actions[bot]` 的 daily commit。
 
-```
-chore: update daily AI news 2026-05-04
+Commit message 格式：
+
+```text
+chore: update daily AI news YYYY-MM-DD
 ```
 
 ---
 
-## 7. Telegram 推播格式
+## 7. Telegram 推播
 
-每次推播分為多則訊息發送：
+`notify.py` 目前使用 Telegram Bot API `sendMessage`，格式為 HTML parse mode。
 
-**第 1 則：標題**
+推播順序：
+
+1. 日期 + 今日專案數量。
+2. 每個專案一則：名稱、今日 stars、language、繁中摘要、GitHub URL。
+3. 最後一則 GitHub Pages 網站連結。
+
+每則訊息之間等待 0.5 秒。單則訊息若超過 Telegram 4096 字元限制會被截斷。
+
+網站連結：
+
+```text
+https://k61513-wes.github.io/GithubTrending
 ```
-📅 2026-05-04 AI 日報
-
-今日共發現 8 個 AI 相關專案 🔥
-```
-
-**第 2–N 則：每個專案各一則**
-```
-1️⃣ ollama/ollama  ⭐ +523
-🔧 Go
-
-Ollama 是一款讓開發者在本機直接執行大型語言模型的工具，
-支援 Llama、Gemma 等主流模型，免雲端即可體驗 AI 推論。
-適合想在本地端安全運行 LLM 的開發者與 AI 研究人員使用。
-
-🔗 https://github.com/ollama/ollama
-```
-
-**最後一則：網站連結**
-```
-🌐 完整日報：https://k61513-wes.github.io/GithubTrending
-```
-
-> 每則訊息間隔 0.5 秒發送，避免觸發 Telegram 速率限制。
 
 ---
 
-## 8. 網站前端說明
+## 8. GitHub Pages
 
-**網址：** https://k61513-wes.github.io/GithubTrending
+靜態前端直接讀 repo 內 JSON，不需要 Web backend：
 
-### 功能
-
-| 功能 | 說明 |
-|------|------|
-| 當日日報 | 預設顯示今天的資料 |
-| 歷史日報切換 | 右上角下拉選單，可查看過去每一天的資料 |
-| 專案卡片 | 顯示名稱（可點擊跳轉）、語言、今日星星數、繁體中文摘要 |
-
-### 資料來源
-
-網站直接讀取 Repo 內的 JSON 檔案：
-
-| 資料 | 對應檔案 |
-|------|---------|
-| 今日日報 | `data/news.json` |
-| 歷史日期清單 | `data/index.json` |
+| 資料 | 檔案 |
+| --- | --- |
+| 最新日報 | `data/news.json` |
+| 歷史日期 | `data/index.json` |
 | 歷史日報 | `data/archive/YYYY-MM-DD.json` |
 
-> 每次 GitHub Actions 執行完畢後，網站約 1–2 分鐘內自動更新。
+主要前端檔案：
+
+```text
+index.html
+app.js
+style.css
+```
+
+如果 workflow 成功但網站看起來沒有更新，先確認 `data/` 是否真的有新的 commit，再檢查 GitHub Pages deployment / browser cache。
 
 ---
 
 ## 9. 金鑰管理
 
-### 取得 Gemini API Key
+### Groq
 
-1. 前往：https://aistudio.google.com/app/apikey
-2. 建立新的 API Key
-3. 填入 `.env` 或 GitHub Secrets
+目前 production workflow 使用 `GROQ_API_KEY`。請在 Groq 帳號端建立 API key，放入 GitHub Actions Secret 或本機 `.env`；不要寫進 `config.json`、README、MANUAL、log 或 commit。
 
-**免費額度：** 1,500 次 / 天（足夠每日執行使用）
+### Telegram Bot Token
 
-### 取得 Telegram Bot Token
+1. 在 Telegram 找 `@BotFather`。
+2. 用 `/newbot` 建立 Bot。
+3. 將 token 放入 `TELEGRAM_BOT_TOKEN`。
 
-1. 在 Telegram 搜尋 `@BotFather`
-2. 傳送 `/newbot`，依指示建立 Bot
-3. 取得 Token（格式：`123456789:ABCdef...`）
+### Telegram Chat ID
 
-### 取得 Telegram Chat ID
+1. 先傳一則訊息給 Bot。
+2. 透過 Telegram Bot API `getUpdates` 查詢 chat id。
+3. 將 id 放入 `TELEGRAM_CHAT_ID`。
 
-1. 先傳送任一訊息給你的 Bot
-2. 在瀏覽器開啟：
-   ```
-   https://api.telegram.org/bot你的TOKEN/getUpdates
-   ```
-3. 找到 JSON 裡的 `"chat": {"id": 數字}`，那個數字就是 Chat ID
+### Optional Gemini path
+
+程式碼仍支援非 `groq/` model 走 Gemini API，但目前 GitHub Actions 沒有注入 `GEMINI_API_KEY`。只有在你明確重新啟用 Gemini model 並同步 workflow / Secret 時才使用。
 
 ---
 
-## 10. 常見問題排查
+## 10. 常見問題
 
-### Q：Telegram 收不到推播
-| 可能原因 | 解法 |
-|---------|------|
-| 還沒傳訊息給 Bot | 先對 Bot 傳一則訊息，再重跑 |
-| Chat ID 填錯 | 重新用 `getUpdates` 確認 |
-| Bot Token 失效 | 向 BotFather 重新取得 Token |
-| GitHub Secrets 沒有設定 | 確認三個 Secret 都有填 |
+### GitHub Actions 顯示 `GROQ_API_KEY 未設定`
 
-### Q：摘要品質差或包含英文推理過程
-| 可能原因 | 解法 |
-|---------|------|
-| 備援模型輸出推理鏈 | 程式已有後處理自動過濾，若仍出現可在 config.json 停用該模型 |
-| 所有模型額度耗盡 | 更換 Gemini API Key，或等隔日額度重置 |
+- 確認 `config.json` 有啟用 `groq/` model。
+- 到 GitHub Actions Secrets 確認 `GROQ_API_KEY` 存在且有效。
 
-### Q：GitHub Actions 執行失敗
-| 錯誤訊息 | 解法 |
-|---------|------|
-| `exit code 128` | 確認 daily.yml 有 `permissions: contents: write` |
-| `GEMINI_API_KEY 未設定` | 確認 GitHub Secrets 有填入正確金鑰 |
-| `HTTP 429` | Gemini API 額度耗盡，更換 API Key |
-| `chat not found` | Telegram Chat ID 填錯，重新確認 |
+### LLM 出現 429 / 500 / 503
 
-### Q：網站沒有更新
-1. 確認 Actions 執行成功（綠色勾勾）
-2. 確認 `data/news.json` 的日期是今天
-3. 等待 1–2 分鐘讓 GitHub Pages 重新部署
-4. 強制重新整理瀏覽器（Ctrl+Shift+R）
+`summarize.py` 會將該 model 視為失敗並嘗試下一個啟用 model。若只有一個 active model，最後可能留下空摘要。檢查 provider quota / status 與 `config.json` active model 設定。
 
-### Q：過濾到不相關的專案
-- 編輯 `config.json` 的 `ai_keywords`，刪除或縮減太寬鬆的關鍵字
-- `"ai"` 這個詞已預設移除（太容易誤判）
+### Telegram 收不到
 
-### Q：想新增更多 AI 關鍵字
-- 編輯 `config.json` 的 `ai_keywords`，在對應分類加入新關鍵字
-- push 後下次執行自動生效
+- 確認 `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID`。
+- 確認 `notifications.telegram` 沒有設為 `false`。
+- 確認 workflow log 中 notify 階段沒有 Telegram error。
+
+### 日報內容不是只有 AI 專案
+
+這是目前 runtime 的已知行為：`run_all.py` 沒有接入 `filter.py`。`ai_keywords` 目前只是未接入主流程的 helper config。若要改回 AI-only，需要正式修改 pipeline，不能只調 keyword。
+
+### 網站沒有更新
+
+1. 確認 workflow 是否成功。
+2. 確認 `data/news.json` 是否已有新 commit。
+3. 確認 GitHub Pages deployment。
+4. 再處理瀏覽器 cache。
+
+### `exit code 128` / push 失敗
+
+目前 workflow 需要 `permissions: contents: write` 才能由 `github-actions[bot]` push `data/`。
 
 ---
 
-## 11. 成本說明
+## 11. 使用量與成本
 
-| 服務 | 方案 | 費用 |
-|------|------|------|
-| GitHub Actions | 免費（2,000 分鐘/月，實際用量約 90–120 分鐘） | $0 |
-| Gemini API | 免費（1,500 次/天，每日約用 5–10 次） | $0 |
-| GitHub Pages | 免費靜態網站（Public Repo） | $0 |
-| Telegram Bot API | 永久免費 | $0 |
-| **每月總計** | | **$0** |
+本專案依賴 GitHub Actions、Groq、Telegram 與 GitHub Pages。實際免費額度、速率限制與費用會隨各服務方案調整，因此本手冊**不把 `$0`、固定 requests/day 或固定 Actions 分鐘數當成長期契約**。
+
+需要判斷當下成本或 quota 時，請以各服務帳號當下方案與官方 dashboard 為準。
+
+---
+
+## 12. 文件與現行正本
+
+| 類型 | 目前來源 |
+| --- | --- |
+| Agent / 開發規則 | `AGENTS.md` |
+| 排程、Python、Secrets | `.github/workflows/daily.yml` |
+| LLM / notification / keywords 設定 | `config.json` |
+| 真正每日 pipeline | `scripts/run_all.py` + `scripts/` |
+| 使用手冊 | `MANUAL.md` |
+| GitHub 專案入口 | `README.md` |
+| 每日產出 evidence | `data/` + Git history |
+
+手冊應描述目前可觀察 runtime，不應用歷史內容覆蓋程式；反過來，若某項產品需求應存在但 runtime 沒有實作，也應明確標示為 requirement / implementation drift，而不是默默把需求刪掉。
