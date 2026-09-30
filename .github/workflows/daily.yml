@@ -1,15 +1,14 @@
 name: Daily AI News
 
+# 已暫停自動排程；保留手動觸發，方便日後需要時單次執行。
 on:
-  schedule:
-    - cron: '0 3 * * *'   # UTC 03:00 = 台灣時間 11:00
-  workflow_dispatch:        # 允許手動觸發，方便測試
+  workflow_dispatch:
 
 permissions:
-  contents: write           # 允許 workflow 寫入並 push 回 repo
+  contents: write
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # 使用 Node.js 24，避免棄用警告
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   update-news:
