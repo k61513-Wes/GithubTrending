@@ -1,181 +1,109 @@
-# GitHub Trending AI 日報
+# GitHub Trending 中文日報
 
-一套由 GitHub Actions 自動執行的 GitHub Trending 日報系統：每天抓取 GitHub Trending，用 LLM 產生繁體中文摘要，推送到 Telegram，並把當日與歷史資料發布到 GitHub Pages。
+這個專案把 GitHub Trending 的熱門專案整理成繁體中文介紹，可推送 Telegram，並用 GitHub Pages 顯示當期與歷史日報。
 
-**網站：** https://k61513-wes.github.io/GithubTrending
+**目前自動排程已暫停，只保留 GitHub Actions 手動執行。**舊文件提到的「每天台灣時間 11:00」已不符合目前 `daily.yml`；本次只更新 README，不重新啟用排程或執行日報。
 
-> README 與 `MANUAL.md` 已依目前 `main` 的 workflow / config / scripts 對齊。現行每日主流程沒有呼叫 `filter.py`，因此 `ai_keywords` 暫時不會把日報限制成 AI-only；若要恢復篩選，需要正式修改 pipeline。
+## 主要功能與現況
 
-## 目前狀態
-
-目前自動化主線：
-
-```text
-每天 11:00（Asia/Taipei）
-        |
-        v
-GitHub Actions: .github/workflows/daily.yml
-        |
-        v
-python scripts/run_all.py
-        |
-        +--> 抓取 GitHub Trending
-        +--> LLM 產生繁體中文摘要
-        +--> data/news.json
-        +--> data/index.json
-        +--> data/archive/YYYY-MM-DD.json
-        +--> Telegram 推播
-        `--> github-actions[bot] commit / push
-                 |
-                 v
-             GitHub Pages
-```
-
-目前 workflow cron 為 `0 3 * * *`，也就是 **台灣時間 11:00**。Workflow 同時支援手動 `workflow_dispatch`。
-
-目前 `config.json` 啟用的第一順位 LLM 為：
-
-```text
-groq/llama-3.3-70b-versatile
-```
-
-Gemma 項目目前以 `//` 前綴停用。Production workflow 目前注入 `GROQ_API_KEY`；程式仍保留非 `groq/` model 的 Gemini path，但沒有在目前 workflow 啟用。
-
-## 核心功能
-
-### Trending 抓取
-
-`scripts/crawler.py` 取得 GitHub Trending 專案資料，作為每日輸入來源。
-
-### AI Keyword Helper（目前未接入每日主流程）
-
-`scripts/filter.py` 可依 `config.json` 的 `ai_keywords` 判斷 AI 相關內容，但目前 `scripts/run_all.py` **沒有呼叫它**。因此調整 `ai_keywords` 現在不會改變 GitHub Actions 的每日輸出。
-
-### 中文摘要
-
-`scripts/summarize.py` 依 `config.json` 的 active LLM model 順序呼叫 provider，產生繁體中文摘要。目前 production 使用 Groq / Llama 3.3 70B。
-
-### Telegram 推播
-
-完整流程會把日報發到指定 Telegram chat；Bot token / chat id 只來自 GitHub Secrets 或本機 `.env`，不寫進 repo。
-
-### GitHub Pages 歷史日報
-
-靜態網站使用 repo 內 JSON：
-
-- `data/news.json`：最新一期。
-- `data/index.json`：歷史日期索引。
-- `data/archive/`：每日歷史資料。
-
-前端由 `index.html`、`app.js`、`style.css` 讀取這些資料，不需要獨立 Web backend。
-
-## 技術棧
-
-| Layer | Technology |
+| 功能 | 現況 |
 | --- | --- |
-| Automation | GitHub Actions |
-| Runtime | Python 3.11（Actions） |
-| Crawl / HTTP | requests、BeautifulSoup |
-| LLM | Groq（目前 config 使用 Llama 3.3 70B） |
-| Notification | Telegram Bot API |
-| Data | JSON files in `data/` |
-| Website | Static HTML / JavaScript / CSS、GitHub Pages |
+| 熱門專案收集 | `scripts/crawler.py` 讀取 GitHub Trending。 |
+| 中文介紹 | 使用模型，依專案名稱、描述及程式語言產生三句介紹。不是完整下載原始碼後的技術審查。 |
+| Telegram | 設定啟用時發送本次日報。 |
+| 靜態網站 | `index.html`、`app.js`、`style.css` 讀取 repo 內的 JSON，沒有常駐 Web 後端或資料庫。 |
+| 歷史資料 | 保存當期 `news.json`、日期索引與每日 archive。 |
+| AI 關鍵字篩選 | 有 `filter.py` 工具，但目前主流程沒有呼叫；修改 `ai_keywords` 不會把輸出自動限制為 AI-only。 |
 
-## Repo 結構
+## 系統架構
 
 ```text
-GithubTrending/
-├── .github/workflows/daily.yml   # 每日排程與 GitHub Actions runtime
-├── scripts/
-│   ├── crawler.py                # GitHub Trending crawler
-│   ├── filter.py                 # AI keyword helper，目前未接入 run_all.py
-│   ├── summarize.py              # LLM 摘要
-│   ├── notify.py                 # Telegram 推播
-│   `-- run_all.py                # 現行完整流程入口
-├── data/
-│   ├── news.json                 # 最新日報
-│   ├── index.json                # 歷史索引
-│   `-- archive/                  # 每日日報歷史
-├── config.json                   # LLM、通知與 AI keyword 設定
-├── index.html                    # GitHub Pages UI
-├── app.js
-├── style.css
-├── requirements.txt
-├── MANUAL.md                     # 長版使用手冊，已對齊現行 runtime
-├── AGENTS.md                     # 專案規則
-`-- README.md                     # GitHub 專案入口
+手動執行 .github/workflows/daily.yml
+  → Python 3.11 → scripts/run_all.py
+      → GitHub Trending → 繁體中文摘要
+      → data/news.json
+      → data/archive/YYYY-MM-DD.json
+      → data/index.json
+      → 依設定發送 Telegram
+  → github-actions[bot] 提交更新的 data/
+  → GitHub Pages 讀取靜態檔與 JSON
 ```
 
-## GitHub Actions 設定
+`run_all.py` 負責資料與通知；Git commit／push 是 workflow 後續步驟，不是本機執行腳本就必然會推送 Git。網站目前是否已完成 Pages 發布，仍需另外查看部署狀態。
 
-目前 workflow 需要以下 GitHub Secrets：
+## 搜尋來源與判斷順序
 
-| Secret | 用途 |
-| --- | --- |
-| `GROQ_API_KEY` | 現行 LLM 摘要 |
-| `TELEGRAM_BOT_TOKEN` | Telegram Bot |
-| `TELEGRAM_CHAT_ID` | 推播目的地 |
+### 資料來源只有 GitHub Trending
 
-Workflow 具有 `contents: write`，因為每日產出完成後會由 `github-actions[bot]` commit / push `data/`。這是自動化本身的權限，不代表互動式 Agent 可以任意 push。
+本流程不是全網搜尋，也沒有 Reddit、X 或新聞來源作備援。取得 Trending 清單後，直接送入摘要流程；目前不經過 `filter.py`，不應把日報標示為已通過 AI 專案篩選。
 
-## 本機執行
+摘要使用的是 crawler 提供的名稱、描述與語言，不會自動讀取每個 repo 全部 README、程式碼或議題。因此介紹可作初步導覽，不能當成功能驗證。
 
-安裝依賴：
+### 模型依設定順序尝試
+
+```text
+讀 config.json 的 llm_models
+  → 排除以 // 開頭的停用項目
+  → 依剩餘清單順序呼叫
+      groq/ 開頭 → Groq
+      其他名稱 → Gemini 路徑
+  → 第一個成功結果：整理輸出後使用
+  → 失敗才試下一個啟用模型
+  → 全部失敗：摘要留空，model_used 記為 none
+```
+
+目前只有 `groq/llama-3.3-70b-versatile` 啟用。兩個 Gemma 項目仍以 `//` 停用，**不是現在可用的自動備援**。workflow 也只注入 Groq 所需的 key；新增 Gemini 模型前，必須同步處理其環境設定。
+
+輸出整理先找程式支援的精煉句格式，再找符合條件的中文段落，再用較寬鬆的中文段落判斷；都無法抽取時保留原輸出。因此「三句繁中」是 prompt 目標及清理規則，不是所有回應必然符合的保證。依據：[`scripts/summarize.py`](scripts/summarize.py)。
+
+### 通知與日期
+
+`notifications.telegram` 決定是否發送 Telegram。現行 `check_keys()` 即使關閉通知，仍會要求 Telegram token 與 chat ID；不能只改成 `false` 就假設不再需要這些環境值。
+
+日報日期以 UTC+8 計算；同一天再次執行會寫回當天 archive，不是每次執行都保留一份新的時間戳檔。完整順序見 [`scripts/run_all.py`](scripts/run_all.py)。
+
+## 套件與版本
+
+| 元件 | repo 宣告 | 用途 |
+| --- | --- | --- |
+| Python | Actions `3.11`，未固定 patch | 執行日報腳本。 |
+| requests | `2.31.0`，固定 | 抓取與 API 請求。 |
+| Beautiful Soup | `4.12.3`，固定 | HTML 解析。 |
+| python-dotenv | `1.0.1`，固定 | 本機環境值載入。 |
+| actions/checkout | `@v4` | 取得 repo；major tag 不是 commit 鎖定。 |
+| actions/setup-python | `@v5` | 建立 Actions Python 環境。 |
+| 前端 | 原生 HTML／JavaScript／CSS | 不需 npm 或框架建置。 |
+| Groq／Gemini／Telegram | 以 HTTP API 呼叫，沒有另外安裝對應 SDK | 模型與通知接線。 |
+
+以上來自 [`requirements.txt`](requirements.txt) 與 [`daily.yml`](.github/workflows/daily.yml)，不是上游最新版本，也不代表本次已驗證服務可用性。
+
+## 設定與本機操作
+
+設定正本為 [`config.json`](config.json)。目前 workflow 需要 `GROQ_API_KEY`、`TELEGRAM_BOT_TOKEN`、`TELEGRAM_CHAT_ID`，實際值留在 GitHub Secrets 或本機 `.env`，不進 Git。
+
+本 repo 原有操作說明未提供 `.env.example`，不要照抄其他專案的範本。模型程式使用 `load_dotenv(override=True)`，本機 `.env` 可能覆蓋既有同名環境變數；執行前先確認使用哪一組設定。
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-```
 
-本 repo **目前沒有提交 `.env.example`**。若要在本機執行完整流程，請自行建立 `.env`，依當前 provider / notification 設定準備：
-
-```text
-GROQ_API_KEY=...
-TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_ID=...
-```
-
-完整執行：
-
-```bash
+# 已確認要查外站、呼叫模型、寫 data/ 及可能推送 Telegram 時才執行
 python scripts/run_all.py
 ```
 
-**注意：這不是唯讀測試。** `run_all.py` 會進行外部網路請求、呼叫 LLM、更新 `data/`，並可能真的發送 Telegram。只想 review 程式碼或驗證格式時，不要把它當 smoke test 直接執行。
+不要把這個完整入口当作唯讀測試；它載入時就會檢查 key，也可能建立資料目錄。一般程式檢查應與真實外站、模型、通知驗證分開。
 
-## 如何調整每日內容
+## 目錄與文件
 
-主要看 `config.json`：
-
-- `notifications.telegram`：是否啟用 Telegram。
-- `llm_models`：provider / model 順序；`//` 前綴代表停用。
-- `ai_keywords`：目前供 `filter.py` 使用，但**未接入現行 daily pipeline**。
-
-排程時間與 Secrets 名稱以 `.github/workflows/daily.yml` 為準；真正每日執行步驟以 `scripts/run_all.py` 為準。
-
-## 驗證方式
-
-純程式變更可先做 Python syntax / source-level 檢查；若修改資料 schema，還需確認：
-
-```text
-scripts output
-  -> data/news.json / index.json / archive
-  -> app.js / GitHub Pages reader
-```
-
-真正驗證 crawler、LLM、Telegram 或 workflow 會產生外部副作用，應明確區分「source check」與「實際 workflow test」。
-
-## 文件與正本
-
-| 角色 | 目前來源 |
+| 路徑 | 用途 |
 | --- | --- |
-| Agent / 開發規則 | `AGENTS.md` |
-| 每日排程、Python 版本、Secrets | `.github/workflows/daily.yml` |
-| LLM provider / model、keywords 與通知開關 | `config.json` |
-| 完整 daily pipeline | `scripts/run_all.py` + `scripts/` |
-| 使用手冊 | `MANUAL.md` |
-| 日報產出 evidence | `data/` + Git history |
-| DevFlow | `.agent/`（明確使用 `df-*` 時） |
+| `.github/workflows/daily.yml` | 現行手動 workflow、環境與資料提交。 |
+| `scripts/crawler.py`、`summarize.py`、`notify.py` | 抓取、摘要、推送。 |
+| `scripts/run_all.py` | 完整流程入口。 |
+| `scripts/filter.py` | 尚未接入主流程的篩選工具。 |
+| `data/` | 自動產出資料，日常文件修改不順便重寫。 |
+| [MANUAL.md](MANUAL.md) | 長版操作說明；排程是否啟用以現行 workflow 為準。 |
+| [AGENTS.md](AGENTS.md) | 修改範圍、外部副作用與驗證要求。 |
 
-若 README、MANUAL、workflow、config 與程式碼互相矛盾，應先列出 drift；不要用較舊的說明覆蓋目前 runtime，也不要默默把 implementation evidence 當成新的產品 requirement。
+本次只核對來源並更新 README，沒有手動觸發 workflow、重新抓 Trending、產生日報、發送 Telegram或檢查 Pages 正式環境。
